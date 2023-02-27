@@ -6,7 +6,7 @@ import { Home, Profile, Posts, Login, Logout, CreateNewPost } from "./components
 const Main = ()=> {
     return(
         <BrowserRouter>
-        <div>Hello</div>
+        <div>Test</div>
         <Routes>
             <Route path ="/Login" element={ <Login/> }/>
             <Route path ="/" element={ <Home/> }/>
