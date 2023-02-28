@@ -5,6 +5,7 @@ import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, N
 
 const Main = ()=> {
     const [posts, setPosts] = useState([]);
+    console.log(posts);
 
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -31,11 +32,11 @@ const Main = ()=> {
             <Header/>
             <Routes>
                 <Route path ="/Login" element={ <Login/> }/>
-                <Route path ="/" element={ <Home posts={ posts }/> }/>
+                <Route path ="/Home" element={ <Home posts={ posts }/> }/>
                 <Route path ="/Profile" element={ <Profile posts={ posts }/> }/>
-                <Route path ="/Posts" element={ <Posts posts={ posts }/> }/>
+                <Route path ="/" element={ <Posts posts={ posts }/> }/>
 
-                <Route path ="/Posts/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } /> }/>
+                <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } /> }/>
 
                 <Route path ="/CreateNewPost" element={ <CreateNewPost posts={ posts }/> }/>
                 <Route path ="/Logout" element={ <Logout/> }/>
