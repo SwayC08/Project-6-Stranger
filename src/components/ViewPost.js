@@ -81,7 +81,7 @@ const ViewPost = (props) => {
 
     return(
         <div>
-            <h3>Post Details {filterPosts[0]._id} </h3>
+            <h3>Post Details ({filterPosts[0]._id}) </h3>
             {
                 filterPosts.length ? (
                     <div>
@@ -102,8 +102,8 @@ const ViewPost = (props) => {
                                     />
                                     <textarea 
                                         type="text" 
-                                        rows="3" 
-                                        cols="100"
+                                        rows="4" 
+                                        cols="75"
                                         value={ newPostDesc }
                                         placeholder={filterPosts[0].description}
                                         onChange={(event)=>{
