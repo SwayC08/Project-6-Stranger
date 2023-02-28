@@ -45,8 +45,9 @@ const Main = ()=> {
     )
 }
 
+createRoot(document.getElementById("app")).render(< Main />)
+
 // const app = document.getElementById("app");
 // let root = createRoot(app);
 // root.render(<Main />)
 
-createRoot(document.getElementById("app")).render(< Main />)
