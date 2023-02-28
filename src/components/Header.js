@@ -3,7 +3,7 @@ import { Navbar } from "../components";
 const Header = () => {
     return(
         <div>
-            <div>Stranger Things </div>
+            <div>Local Listings </div>
             <Navbar/>
         </div>
     )

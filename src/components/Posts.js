@@ -7,14 +7,20 @@ const Post = (props) => {
     const { posts } = props;
 
     const [search, setSearch] = useState("");
-    
+
+    let filteredPosts = posts.filter((searchPost)=> {
+        // let lowercase = singlePost.title.toLowerCase();
+        // return lowercase.includes(search.toLowerCase())
+        return ((searchPost.title.toLowerCase()).includes(search.toLowerCase()))
+    })
+
     return(
         <div>
             <h3>All Posts</h3>
-            <Search search={ search } setSearch={ setSearch } />
+            <Search search={ search } setSearch={ setSearch } posts={ posts } />
             <div>
                 {
-                    props.posts.length ? props.posts.map((onePost) => {
+                    filteredPosts.length ? filteredPosts.map((onePost) => {
                         return (
                             <div key={onePost._id}>
                                 <Link to={`/${onePost._id}`}> POST: { onePost.title }</Link>

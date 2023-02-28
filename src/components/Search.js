@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Search = (props) => {
 
-    const { search, setSearch } = props
+    const { setSearch} = props
 
     return (
         <div>
