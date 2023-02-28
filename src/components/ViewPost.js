@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const ViewPost = (props) => {
+    const { posts } = props;
 
     const [editStat, setEditStat] = useState(false);
 
@@ -32,7 +33,43 @@ const ViewPost = (props) => {
     async function putReqUpdateFnc (event){
         event.preventDefault();
         try {
-            const response = await fetch(`${BASE_URL}/posts`) 
+            const response = await fetch(`${BASE_URL}/posts/${_id}`,
+                {
+                    method: "PUT",
+                    header: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        title: newPostNam,
+                        description: newPostDesc,
+                        })
+                }
+            ); 
+            const transData = await response.json();
+            
+            function updatePostData(){
+                let upArr =[];
+
+                for (let i=0; 0>props.posts.length; i++){
+                    let currentPost = props.posts[i];
+
+                    if (currentPost._id != _id){
+                        upArr.push(currentPost);
+                    } else{
+                        upArr.push(transData);
+                    }
+                }
+                return upArr;
+            };
+
+            const updatePostData = updatePostData();
+
+            props.setPosts(updatePostData);
+
+            nav("/")
+
+        } catch (error){
+            console.log(error);
         }
     };
 

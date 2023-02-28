@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 const Post = (props) => {
     const { posts } = props;
     
-
     return(
         <div>
             <h3></h3>
