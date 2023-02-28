@@ -3,18 +3,19 @@ import { useState } from "react";
 
 const ViewPost = (props) => {
     const { posts } = props;
+    // console.log(props);
 
     const [editStat, setEditStat] = useState(false);
 
     const { _id } = useParams();
-    console.log(useParams());
+    // console.log(useParams());
 
     let filterPosts;
 
     filterPosts = props.posts.filter((onePost) => {
         return onePost._id == _id
     });
-    console.log(filterPosts);
+    // console.log(filterPosts);
 
     const [newPostNam , setNewPostNam] = useState(
         filterPosts.length ? filterPosts[0].title : ""
@@ -24,11 +25,14 @@ const ViewPost = (props) => {
         filterPosts.length ? filterPosts[0].description : ""
     );
 
-    function togEditFrmFnc (){
+    function togEditFrmFnc() {
         setEditStat(!editStat)
     };
 
-    const nav = useNavigate ();
+    const nav = useNavigate();
+
+    const COHORT_NAME ='2301-FTB-MT-WEB-FT';
+    const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
     async function putReqUpdateFnc (event){
         event.preventDefault();
@@ -42,10 +46,11 @@ const ViewPost = (props) => {
                     body: JSON.stringify({
                         title: newPostNam,
                         description: newPostDesc,
-                        })
+                    })
                 }
             ); 
             const transData = await response.json();
+            console.log(transData);
             
             function updatePostData(){
                 let upArr =[];
@@ -62,11 +67,12 @@ const ViewPost = (props) => {
                 return upArr;
             };
 
-            const updatePostData = updatePostData();
+            const newPostData = updatePostData();
 
-            props.setPosts(updatePostData);
+            props.setPosts(newPostData);
+            console.log(transData);
 
-            nav("/")
+            nav("/");
 
         } catch (error){
             console.log(error);
@@ -83,8 +89,34 @@ const ViewPost = (props) => {
                         <div>Description: {filterPosts[0].description}</div>
                         <div>Price: {filterPosts[0].price}</div>
                         <div>Created On: {filterPosts[0].createdAt}</div>
+                        <button onClick={ togEditFrmFnc }>Edit </button>
+                        {
+                            setEditStat ? (
+                                <form onSubmit={ putReqUpdateFnc }>
+                                    <h3>Update Post</h3>
+                                    <input type="text" value={ newPostNam } onChange={(event)=>{
+                                        console.log(event.target.value);
+                                        setNewPostNam(event.target.value);
+                                    }}
+                                    placeholder={filterPosts[0].title}
+                                    />
+                                    <textarea 
+                                        type="text" 
+                                        rows="3" 
+                                        cols="100"
+                                        value={ newPostDesc }
+                                        placeholder={filterPosts[0].description}
+                                        onChange={(event)=>{
+                                            console.log(event.target.value);
+                                            setNewPostDesc(event.target.value);
+                                        }}
+                                    />
+                                    <button type="submit">Submit</button>
+                                </form>
+                            ): ""
+                        }
                     </div>
-                ) : ""
+                ) : <div>No Data Available</div>
             }
         </div>
     )
