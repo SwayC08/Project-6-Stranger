@@ -7,5 +7,5 @@ export { default as CreateNewPost} from "./CreateNewPost";
 export { default as Navbar} from "./Navbar";
 export { default as Header} from "./Header";
 export { default as ViewPost} from "./ViewPost";
-
+export { default as Search} from "./Search";
 

@@ -1,11 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Search } from "../components";
+
 
 const Post = (props) => {
     const { posts } = props;
+
+    const [search, setSearch] = useState("");
     
     return(
         <div>
-            <h3></h3>
+            <h3>All Posts</h3>
+            <Search search={ search } setSearch={ setSearch } />
             <div>
                 {
                     props.posts.length ? props.posts.map((onePost) => {

@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, Navbar } from "./components";
+import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, Navbar, Search } from "./components";
 
 const Main = ()=> {
     const [posts, setPosts] = useState([]);
@@ -40,7 +40,7 @@ const Main = ()=> {
 
                 <Route path ="/CreateNewPost" element={ <CreateNewPost posts={ posts }/> }/>
                 <Route path ="/Logout" element={ <Logout/> }/>
-                <Route path ="/Navbar" element={ <Navbar/> }/>
+                {/* <Route path ="/Navbar" element={ <Navbar/> }/> */}
             </Routes>
         </BrowserRouter>
     )
