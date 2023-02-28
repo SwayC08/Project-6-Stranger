@@ -91,7 +91,7 @@ const ViewPost = (props) => {
                         <div>Created On: {filterPosts[0].createdAt}</div>
                         <button onClick={ togEditFrmFnc }>Edit </button>
                         {
-                            setEditStat ? (
+                            editStat ? (
                                 <form onSubmit={ putReqUpdateFnc }>
                                     <h3>Update Post</h3>
                                     <input type="text" value={ newPostNam } onChange={(event)=>{
