@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const ViewPost = (props) => {
-    const { posts } = props;
+    const { posts, setPosts } = props;
     // console.log(props);
 
     const [editStat, setEditStat] = useState(false);
@@ -16,15 +16,15 @@ const ViewPost = (props) => {
         return onePost._id == _id
     });
     // console.log(filterPosts);
-
+// state set to pre-existing title if empty 
     const [newPostNam , setNewPostNam] = useState(
         filterPosts.length ? filterPosts[0].title : ""
     );
-
+// state set to pre-existing description if empty
     const [newPostDesc, setNewPostDesc] = useState(
         filterPosts.length ? filterPosts[0].description : ""
     );
-
+// toggle Edit form from button 
     function togEditFrmFnc() {
         setEditStat(!editStat)
     };
@@ -34,6 +34,7 @@ const ViewPost = (props) => {
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
+// Update request to API
     async function putReqUpdateFnc (event){
         event.preventDefault();
         try {
@@ -50,27 +51,25 @@ const ViewPost = (props) => {
                 }
             ); 
             const transData = await response.json();
-            console.log(transData);
+
+            // console.log(transData);
             
-            function updatePostData(){
-                let upArr =[];
+            // function updatePostData(){
+            //     let upArr =[];
+            //     for (let i=0; 0>props.posts.length; i++){
+            //         let currentPost = props.posts[i];
+            //         if (currentPost._id != _id){
+            //             upArr.push(currentPost);
+            //         } else{
+            //             upArr.push(transData);
+            //         }
+            //     }
+            //     return upArr;
+            // };
+            // const newPostData = updatePostData();
+            // props.setPosts(newPostData);
 
-                for (let i=0; 0>props.posts.length; i++){
-                    let currentPost = props.posts[i];
-
-                    if (currentPost._id != _id){
-                        upArr.push(currentPost);
-                    } else{
-                        upArr.push(transData);
-                    }
-                }
-                return upArr;
-            };
-
-            const newPostData = updatePostData();
-
-            props.setPosts(newPostData);
-            console.log(transData);
+            props.setPosts(transData);
 
             nav("/");
 
