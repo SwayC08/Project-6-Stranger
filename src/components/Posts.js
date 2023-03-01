@@ -18,12 +18,14 @@ const Post = (props) => {
         <div>
             <h3>All Posts</h3>
             <Search search={ search } setSearch={ setSearch } posts={ posts } />
+            <hr/>
             <div>
                 {
                     filteredPosts.length ? filteredPosts.map((onePost) => {
                         return (
                             <div key={onePost._id}>
-                                <Link to={`/${onePost._id}`}> POST: { onePost.title }</Link>
+                                <Link to={`/${onePost._id}`}> POST: { onePost.title } ({ onePost.price })</Link>
+                                <hr/>
                             </div>
                         )
                     }) : <div>No Data Available</div>
