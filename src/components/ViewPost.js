@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const ViewPost = (props) => {
-    const { posts, setPosts } = props;
+    const { posts, setPosts, loggedIn } = props;
     // console.log(props);
 
     const [editStat, setEditStat] = useState(false);
@@ -34,7 +34,7 @@ const ViewPost = (props) => {
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-// Update request to API
+// Update request 
     async function putReqUpdateFnc (event){
         event.preventDefault();
         try {
@@ -51,9 +51,9 @@ const ViewPost = (props) => {
                 }
             ); 
             const transData = await response.json();
-
             // console.log(transData);
-            
+
+// API temp editing workaround
             // function updatePostData(){
             //     let upArr =[];
             //     for (let i=0; 0>props.posts.length; i++){
@@ -88,8 +88,9 @@ const ViewPost = (props) => {
                         <div>Description: {filterPosts[0].description}</div>
                         <div>Price: {filterPosts[0].price}</div>
                         <div>Created On: {filterPosts[0].createdAt}</div>
-                        {/* { !loggedIn ? <div></div> : <Link to="/Logout"> Logout </Link> } */}
+                        { !loggedIn ? <div></div> : 
                         <button onClick={ togEditFrmFnc }>Edit </button>
+                        }
                         {
                             editStat ? (
                                 <form onSubmit={ putReqUpdateFnc }>

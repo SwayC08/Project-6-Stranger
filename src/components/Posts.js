@@ -4,7 +4,7 @@ import { Search } from "../components";
 
 
 const Post = (props) => {
-    const { posts } = props;
+    const { posts, loggedIn } = props;
 
     const [search, setSearch] = useState("");
 
