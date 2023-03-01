@@ -29,18 +29,18 @@ const Main = ()=> {
     
     return(
         <BrowserRouter>
-            <Header/>
+            <Header loggedIn={ loggedIn } />
             <Routes>
                 <Route path ="/Login" element={ <Login/> }/>
                 <Route path ="/Home" element={ <Home posts={ posts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn } /> }/>
-                <Route path ="/Profile" element={ <Profile posts={ posts }/> }/>
-                <Route path ="/" element={ <Posts posts={ posts }/> }/>
+                <Route path ="/Profile" element={ <Profile posts={ posts } loggedIn={ loggedIn }/> }/>
+                <Route path ="/" element={ <Posts posts={ posts } loggedIn={ loggedIn }/> }/>
 
-                <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } /> }/>
+                <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } /> }/>
 
                 <Route path ="/CreateNewPost" element={ <CreateNewPost posts={ posts }/> }/>
                 <Route path ="/Logout" element={ <Logout/> }/>
-                <Route path ="/NewUser" element={ <NewUser/> }/>
+                <Route path ="/NewUser" element={ <NewUser loggedIn={ loggedIn }/> }/>
                 {/* <Route path ="/Navbar" element={ <Navbar/> }/> */}
             </Routes>
         </BrowserRouter>

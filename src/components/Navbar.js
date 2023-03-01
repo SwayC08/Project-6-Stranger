@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+// loggedIn
+const Navbar = (props) => {
+    const { loggedIn } = props;
+
     return(
         <div>
-            <Link to="/NewUser"> Sign Up </Link>
+            { loggedIn ? <div></div> : <Link to="/NewUser"> Sign Up </Link> }
             <Link to="/Home"> Home </Link>
-            <Link to="/Profile"> Profile </Link>
+            { !loggedIn ? <div></div> : <Link to="/Profile"> Profile </Link> }
             <Link to="/"> Posts </Link>
-            <Link to="/Logout"> Logout </Link>
+            { !loggedIn ? <div></div> : <Link to="/Logout"> Logout </Link> }
         </div>
     )
 }

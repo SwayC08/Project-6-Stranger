@@ -88,6 +88,7 @@ const ViewPost = (props) => {
                         <div>Description: {filterPosts[0].description}</div>
                         <div>Price: {filterPosts[0].price}</div>
                         <div>Created On: {filterPosts[0].createdAt}</div>
+                        {/* { !loggedIn ? <div></div> : <Link to="/Logout"> Logout </Link> } */}
                         <button onClick={ togEditFrmFnc }>Edit </button>
                         {
                             editStat ? (

@@ -1,10 +1,12 @@
 import { Navbar } from "../components";
 
-const Header = () => {
+const Header = (props) => {
+    const { loggedIn } = props;
+
     return(
         <div>
             <div>Local Listings </div>
-            <Navbar/>
+            <Navbar loggedIn={ loggedIn }/>
         </div>
     )
 }

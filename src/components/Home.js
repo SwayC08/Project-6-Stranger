@@ -8,8 +8,9 @@ const Home = (props) => {
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
     useEffect(()=> {
+// Auth Check
         if (localStorage.getItem("token")){
-            console.log(localStorage.getItem("token"));
+            // console.log(localStorage.getItem("token"));
             props.setLoggedIn(true);
             fetchData();
         } else {
@@ -28,7 +29,6 @@ const Home = (props) => {
                 const transData = await response.json();
                 // console.log(transData); 
                 setData(transData.data);
-                console.log(setData(transData.data));
             } catch(error){
                 console.log(error);
             }
