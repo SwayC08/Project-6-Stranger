@@ -6,10 +6,10 @@ import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, N
 
 const Main = ()=> {
     const [posts, setPosts] = useState([]);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
-    // `${BASE_URL}/posts`
 
     async function fetchPosts(){        
         try{
@@ -32,7 +32,7 @@ const Main = ()=> {
             <Header/>
             <Routes>
                 <Route path ="/Login" element={ <Login/> }/>
-                <Route path ="/Home" element={ <Home posts={ posts }/> }/>
+                <Route path ="/Home" element={ <Home posts={ posts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn } /> }/>
                 <Route path ="/Profile" element={ <Profile posts={ posts }/> }/>
                 <Route path ="/" element={ <Posts posts={ posts }/> }/>
 
