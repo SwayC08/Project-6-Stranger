@@ -1,11 +1,11 @@
 import { createRoot } from "react-dom/client";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, Navbar, Search } from "./components";
+
+import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, Navbar, Search, NewUser } from "./components";
 
 const Main = ()=> {
     const [posts, setPosts] = useState([]);
-    console.log(posts);
 
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -40,6 +40,7 @@ const Main = ()=> {
 
                 <Route path ="/CreateNewPost" element={ <CreateNewPost posts={ posts }/> }/>
                 <Route path ="/Logout" element={ <Logout/> }/>
+                <Route path ="/NewUser" element={ <NewUser/> }/>
                 {/* <Route path ="/Navbar" element={ <Navbar/> }/> */}
             </Routes>
         </BrowserRouter>
