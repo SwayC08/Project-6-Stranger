@@ -33,7 +33,9 @@ const Main = ()=> {
             <Routes>
                 <Route path ="/Login" element={ <Login/> }/>
                 <Route path ="/Home" element={ <Home posts={ posts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn } /> }/>
-                <Route path ="/Profile" element={ <Profile posts={ posts } loggedIn={ loggedIn }/> }/>
+
+                <Route path ="/Profile" element={ <Profile posts={ posts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn }/> }/>
+                
                 <Route path ="/" element={ <Posts posts={ posts } loggedIn={ loggedIn }/> }/>
 
                 <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } /> }/>

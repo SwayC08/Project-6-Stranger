@@ -21,7 +21,7 @@ const Login = () => {
             } else if (loginPass.length < 5){
                 alert("Password is too short. 5 Character Minimum")
                 return;
-            }
+            };
             const response = await fetch(`${BASE_URL}/users/login`, {
                 method: "POST",
                 headers: {
@@ -33,7 +33,7 @@ const Login = () => {
                         password: loginPass
                     }
                 })
-            })
+            });
             const transData = await response.json();
 
             if (!transData.success){

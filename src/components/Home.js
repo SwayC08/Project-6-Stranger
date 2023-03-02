@@ -16,16 +16,16 @@ const Home = (props) => {
         } else {
             props.setLoggedIn(false);
             console.log("No Token Exists");
-        }
+        };
 
         async function fetchData(){
             try {
                 const response = await fetch(`${BASE_URL}/users/me`, {
                     headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                        'Content-Type': 'application/json',
+                        'Authorization' : `Bearer ${localStorage.getItem("token")}`,
                     }
-                })    
+                });    
                 const transData = await response.json();
                 console.log(transData); 
                 setData(transData.data);

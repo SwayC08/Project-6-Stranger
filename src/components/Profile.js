@@ -1,7 +1,7 @@
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
-const Profile = () => {
+const Profile = (props) => {
     const [createStat, setCreateStat] = useState(false);
     const [createTitle, setCreateTitle ] = useState("");
     const [createDesc, setCreateDesc ] = useState("");
@@ -18,38 +18,52 @@ const Profile = () => {
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
     console.log(localStorage.getItem("token"));
 
+//     useEffect(()=> {
+// // Auth Check
+//         if (localStorage.getItem("token")){
+//             // console.log(localStorage.getItem("token"));
+//             props.setLoggedIn(true);
+//             // createReqFnc();
+//         } else {
+//             props.setLoggedIn(false);
+//             console.log("No Token Exists");
+//         };
+
 // Create request 
-    async function createReqFnc (event){
-        event.preventDefault();
-        try {
-            const response = await fetch(`${BASE_URL}/posts`, {
-                    method: "POST",
-                    header: {
-                        "Content-type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    },
-                    body: JSON.stringify({
-                        title: createTitle,
-                        description: createDesc,
-                        price: createPrice,
-                    })
+        async function createReqFnc(event){
+            event.preventDefault();
+            try {
+                const response = await fetch(`${BASE_URL}/posts`, {
+                        method: "POST",
+                        header: {
+                            'Content-type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                        },
+                        body: JSON.stringify({
+                            post: {
+                                title: createTitle,
+                                description: createDesc,
+                                price: createPrice,
+                                willDeliver: true
+                            }   
+                        })
+                    }
+                ); 
+                const transData = await response.json();
+                console.log(transData);
+
+                if (!transData.success){
+                    alert("Post was not created. Please try again. ");
+                } else {
+                    props.setPosts(transData);
+                    alert("Post was successfully created.");
+                    nav("/")
                 }
-            ); 
-            const transData = await response.json();
-            console.log(transData);
-
-            if (!transData.success){
-                alert("Post was not created. Please try again. ");
-            } else {
-                alert("Post was successfully created.");
-                nav("/")
+            } catch (error){
+                console.log(error);
             }
-        } catch (error){
-            console.log(error);
-        }
-    };
-
-
+        };
+    // }, )
 
     return(
         <div>
@@ -58,12 +72,12 @@ const Profile = () => {
                 <button onClick={ togCreateFrmFnc }>Create New Post</button>
                 {
                     createStat ? (
-                        <form onSubmit={ createReqFnc }>
+                        <form onSubmit={createReqFnc}>
                             <h3>Create New Post</h3>
                             <input 
                                 type="text" 
                                 onChange={(event)=>{
-                                    console.log(event.target.value);
+                                    // console.log(event.target.value);
                                     setCreateTitle(event.target.value);
                                 }}
                                 placeholder="Post Name"
@@ -74,14 +88,14 @@ const Profile = () => {
                                 cols="75"
                                 placeholder="Post Description"
                                 onChange={(event)=>{
-                                    console.log(event.target.value);
+                                    // console.log(event.target.value);
                                     setCreateDesc(event.target.value);
                                 }}
                             />
                             <input 
                                 type="text" 
                                 onChange={(event)=>{
-                                    console.log(event.target.value);
+                                    // console.log(event.target.value);
                                     setCreatePrice(event.target.value);
                                 }}
                                 placeholder="Price"

@@ -11,7 +11,7 @@ const NewUser = () => {
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-    async function NewAccount(event){
+    async function newAccount(event){
         event.preventDefault();
 
         try {
@@ -40,6 +40,7 @@ const NewUser = () => {
                 alert("New Account was not registered. Please try again.");
             } else {
                 const tokenKey = transData.data.token;
+                console.log(tokenKey);
                 localStorage.setItem("token", tokenKey);
                 alert("New Account was successfully created.");
                 nav("/Home")
@@ -52,7 +53,7 @@ const NewUser = () => {
     return(
         <div>
             <h2>Create a New Account</h2>
-            <form onSubmit={ NewAccount }>
+            <form onSubmit={ newAccount }>
                 <input 
                     type="text"
                     placeholder="New Username"
