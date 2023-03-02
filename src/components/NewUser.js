@@ -41,13 +41,13 @@ const NewUser = () => {
             } else {
                 const tokenKey = transData.data.token;
                 localStorage.setItem("token", tokenKey);
-                nav("/")
+                alert("New Account was successfully created.");
+                nav("/Home")
             }
         } catch(error){
             console.log(error)
         }
     }
-
 
     return(
         <div>

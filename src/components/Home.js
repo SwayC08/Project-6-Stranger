@@ -23,11 +23,11 @@ const Home = (props) => {
                 const response = await fetch(`${BASE_URL}/users/me`, {
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
                     }
                 })    
                 const transData = await response.json();
-                // console.log(transData); 
+                console.log(transData); 
                 setData(transData.data);
             } catch(error){
                 console.log(error);
@@ -39,7 +39,7 @@ const Home = (props) => {
         <div>
             {
                 props.loggedIn ? 
-            <h2>Welcome to Local Listings, { data.username }</h2> : 
+            <h2>Welcome to Local Listings, { data.username } { data.messages } { data.posts }</h2> : 
             // <p>This site is dedicated to serving the local community.</p>
             // <p>You do not need an account to browse postings. </p>
             <h2>Please create an account or sign in, if you would like to post a new item.</h2>
