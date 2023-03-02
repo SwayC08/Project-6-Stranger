@@ -8,7 +8,7 @@ const NewUser = () => {
 
     const nav = useNavigate();
 
-    const COHORT_NAME ='2301-FTB-MT-WEB-FT';
+    const COHORT_NAME ='2301-ftb-mt-web-ft';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
     async function newAccount(event){

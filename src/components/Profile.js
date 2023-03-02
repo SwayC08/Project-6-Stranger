@@ -39,30 +39,28 @@ const Profile = (props) => {
             const COHORT_NAME ='2301-FTB-MT-WEB-FT';
             const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
             const tokenKey = localStorage.getItem("token");
-            console.log("This is the token key" + tokenKey)
+            console.log("This is the token key" + typeof tokenKey)
 
             try {
                 const response = await fetch(`${BASE_URL}/posts`, {
                         method: "POST",
                         header: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${ tokenKey }`,
+                            'Authorization': `Bearer ${tokenKey}`
                             // 'Authorization': 'Bearer ' + tokenKey,
                         },
                         body: JSON.stringify({
                             post: {
-                                // title: "Hello",
-                                // description: "World",
-                                // price: "Test",
                                 title: createTitle,
                                 description: createDesc,
                                 price: createPrice,
-                                // willDeliver: true
+                                willDeliver: true
                             }   
                         })
                     }); 
                 const transData = await response.json();
                 console.log(transData);
+                console.log(transData.error);
 
                 if (!transData.success){
                     alert("Post was not created. Please try again. ");

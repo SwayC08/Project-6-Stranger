@@ -39,7 +39,8 @@ const Home = (props) => {
         <div>
             {
                 props.loggedIn ? 
-            <h2>Welcome to Local Listings, { data.username } { data.messages } { data.posts }</h2> : 
+            // <h2>Welcome to Local Listings, { data.username } { data.messages } { data.posts }</h2> : 
+            <div>Im logged in</div>:
             // <p>This site is dedicated to serving the local community.</p>
             // <p>You do not need an account to browse postings. </p>
             <h2>Please create an account or sign in, if you would like to post a new item.</h2>
