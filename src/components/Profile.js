@@ -16,8 +16,8 @@ const Profile = (props) => {
 
     console.log(localStorage.getItem("token"));
 
-    useEffect(()=> {
 // Auth Check
+    useEffect(()=> {
         if (localStorage.getItem("token")){
             console.log(props);
             console.log(localStorage.getItem("token"));
@@ -39,17 +39,21 @@ const Profile = (props) => {
             const COHORT_NAME ='2301-FTB-MT-WEB-FT';
             const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
             const tokenKey = localStorage.getItem("token");
+            console.log("This is the token key" + tokenKey)
 
             try {
                 const response = await fetch(`${BASE_URL}/posts`, {
                         method: "POST",
                         header: {
-                            'Content-type': 'application/json',
-                            // 'Authorization': `Bearer ${ tokenKey }`,
-                            'Authorization': 'Bearer ' + tokenKey,
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${ tokenKey }`,
+                            // 'Authorization': 'Bearer ' + tokenKey,
                         },
                         body: JSON.stringify({
                             post: {
+                                // title: "Hello",
+                                // description: "World",
+                                // price: "Test",
                                 title: createTitle,
                                 description: createDesc,
                                 price: createPrice,
@@ -63,9 +67,16 @@ const Profile = (props) => {
                 if (!transData.success){
                     alert("Post was not created. Please try again. ");
                 } else {
+//spread op (clone) + new post 
                     props.setPosts([transData, ...props.posts]);
                     // props.setPosts(transData);
                     alert("Post was successfully created.");
+// reset form
+                    setCreateStat(false)
+                    setCreateTitle("")
+                    setCreateDesc("")
+                    setCreatePrice("")
+// nav to posts
                     nav("/")
                 }
             } catch (error){
@@ -117,7 +128,6 @@ const Profile = (props) => {
                     ): ""
                 }
             </div>
-            <div></div>
         </div>
     );
 }
