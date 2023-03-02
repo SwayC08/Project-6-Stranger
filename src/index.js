@@ -34,7 +34,7 @@ const Main = ()=> {
                 <Route path ="/Login" element={ <Login/> }/>
                 <Route path ="/Home" element={ <Home posts={ posts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn } /> }/>
 
-                <Route path ="/Profile" element={ <Profile posts={ posts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn }/> }/>
+                <Route path ="/Profile" element={ <Profile posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn }/> }/>
                 
                 <Route path ="/" element={ <Posts posts={ posts } loggedIn={ loggedIn }/> }/>
 

@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = (props) => {
     const [createStat, setCreateStat] = useState(false);
-    const [createTitle, setCreateTitle ] = useState("");
-    const [createDesc, setCreateDesc ] = useState("");
-    const [createPrice, setCreatePrice ] = useState("");
+    const [createTitle, setCreateTitle ] = useState([]);
+    const [createDesc, setCreateDesc ] = useState([]);
+    const [createPrice, setCreatePrice ] = useState([]);
 
 // toggle Create form  button 
     function togCreateFrmFnc() {
@@ -21,7 +21,9 @@ const Profile = (props) => {
     useEffect(()=> {
 // Auth Check
         if (localStorage.getItem("token")){
-            // console.log(localStorage.getItem("token"));
+            console.log(props);
+            console.log(localStorage.getItem("token"));
+            
             props.setLoggedIn(true);
 
         } else {
@@ -40,7 +42,8 @@ const Profile = (props) => {
                         method: "POST",
                         header: {
                             'Content-type': 'application/json',
-                            'Authorization': `Bearer ${ tokenKey }`,
+                            // 'Authorization': `Bearer ${ tokenKey }`,
+                            'Authorization': 'Bearer ' + tokenKey,
                         },
                         body: JSON.stringify({
                             post: {
@@ -57,7 +60,8 @@ const Profile = (props) => {
                 if (!transData.success){
                     alert("Post was not created. Please try again. ");
                 } else {
-                    props.setPosts(transData);
+                    props.setPosts([transData, ...props.posts]);
+                    // props.setPosts(transData);
                     alert("Post was successfully created.");
                     nav("/")
                 }
@@ -65,7 +69,7 @@ const Profile = (props) => {
                 console.log(error);
             }
         };
-    // }, )
+    // }, [])
 
     return(
         <div>
@@ -74,10 +78,11 @@ const Profile = (props) => {
                 <button onClick={ togCreateFrmFnc }>Create New Post</button>
                 {
                     createStat ? (
-                        <form onSubmit={createReqFnc}>
+                        <form onSubmit={ createReqFnc }>
                             <h3>Create New Post</h3>
                             <input 
-                                type="text" 
+                                type="text"
+                                value={ createTitle }
                                 onChange={(event)=>{
                                     // console.log(event.target.value);
                                     setCreateTitle(event.target.value);
@@ -85,7 +90,8 @@ const Profile = (props) => {
                                 placeholder="Post Name"
                             />
                             <textarea 
-                                type="text" 
+                                type="text"
+                                value={ createDesc } 
                                 rows="4" 
                                 cols="75"
                                 placeholder="Post Description"
@@ -95,7 +101,8 @@ const Profile = (props) => {
                                 }}
                             />
                             <input 
-                                type="text" 
+                                type="text"
+                                value={ createPrice } 
                                 onChange={(event)=>{
                                     // console.log(event.target.value);
                                     setCreatePrice(event.target.value);

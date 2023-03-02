@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const NewUser = () => {
 
-    const [newUser, setNewUser] = useState("");
-    const [newPass, setNewPass] = useState(""); 
+    const [newUser, setNewUser] = useState([]);
+    const [newPass, setNewPass] = useState([]); 
 
     const nav = useNavigate();
 
@@ -43,6 +43,8 @@ const NewUser = () => {
                 console.log(tokenKey);
                 localStorage.setItem("token", tokenKey);
                 alert("New Account was successfully created.");
+                setNewUser("")
+                setNewPass("")
                 nav("/Home")
             }
         } catch(error){
@@ -56,11 +58,13 @@ const NewUser = () => {
             <form onSubmit={ newAccount }>
                 <input 
                     type="text"
+                    value={ newUser }
                     placeholder="New Username"
                     onChange={(event)=> setNewUser(event.target.value)}
                 />
                 <input 
                     type="text"
+                    value={ newPass }
                     placeholder="New Password"
                     onChange={(event)=> setNewPass(event.target.value)}
                 />
