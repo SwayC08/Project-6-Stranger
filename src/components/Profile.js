@@ -18,16 +18,19 @@ const Profile = (props) => {
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
     console.log(localStorage.getItem("token"));
 
-//     useEffect(()=> {
-// // Auth Check
-//         if (localStorage.getItem("token")){
-//             // console.log(localStorage.getItem("token"));
-//             props.setLoggedIn(true);
-//             // createReqFnc();
-//         } else {
-//             props.setLoggedIn(false);
-//             console.log("No Token Exists");
-//         };
+    useEffect(()=> {
+// Auth Check
+        if (localStorage.getItem("token")){
+            // console.log(localStorage.getItem("token"));
+            props.setLoggedIn(true);
+
+        } else {
+            props.setLoggedIn(false);
+            console.log("No Token Exists");
+        };
+    }, []);
+
+        const tokenKey = localStorage.getItem("token");
 
 // Create request 
         async function createReqFnc(event){
@@ -37,18 +40,17 @@ const Profile = (props) => {
                         method: "POST",
                         header: {
                             'Content-type': 'application/json',
-                            'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                            'Authorization': `Bearer ${ tokenKey }`,
                         },
                         body: JSON.stringify({
                             post: {
                                 title: createTitle,
                                 description: createDesc,
                                 price: createPrice,
-                                willDeliver: true
+                                // willDeliver: true
                             }   
                         })
-                    }
-                ); 
+                    }); 
                 const transData = await response.json();
                 console.log(transData);
 

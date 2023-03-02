@@ -39,6 +39,8 @@ const Login = () => {
             if (!transData.success){
                 alert("Login was unsuccessful. Please try again. ");
             } else {
+                localStorage.getItem("token");
+                console.log(localStorage.getItem("token"));
                 alert("Login was successfully.");
                 nav("/Home")
             }
