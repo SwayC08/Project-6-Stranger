@@ -46,7 +46,8 @@ const Profile = (props) => {
                         method: "POST",
                         header: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${tokenKey}`
+                            "Authorization": `Bearer ${JSON.stringify(localStorage.getItem("token"))}`
+                            // 'Authorization': `Bearer ${tokenKey}`
                             // 'Authorization': 'Bearer ' + tokenKey,
                         },
                         body: JSON.stringify({

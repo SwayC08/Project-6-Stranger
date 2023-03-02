@@ -42,6 +42,8 @@ const Login = () => {
                 localStorage.getItem("token");
                 console.log(localStorage.getItem("token"));
                 alert("Login was successfully.");
+                setLoginUser("")
+                setLoginPass("")
                 nav("/Home")
             }
         } catch(error){
