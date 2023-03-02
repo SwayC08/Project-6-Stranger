@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = (props) => {
     const [createStat, setCreateStat] = useState(false);
-    const [createTitle, setCreateTitle ] = useState([]);
-    const [createDesc, setCreateDesc ] = useState([]);
-    const [createPrice, setCreatePrice ] = useState([]);
+    const [createTitle, setCreateTitle ] = useState("");
+    const [createDesc, setCreateDesc ] = useState("");
+    const [createPrice, setCreatePrice ] = useState("");
 
 // toggle Create form  button 
     function togCreateFrmFnc() {
@@ -14,8 +14,6 @@ const Profile = (props) => {
 
     const nav = useNavigate();
 
-    const COHORT_NAME ='2301-FTB-MT-WEB-FT';
-    const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
     console.log(localStorage.getItem("token"));
 
     useEffect(()=> {
@@ -32,11 +30,16 @@ const Profile = (props) => {
         };
     }, []);
 
-        const tokenKey = localStorage.getItem("token");
+        
 
 // Create request 
         async function createReqFnc(event){
             event.preventDefault();
+
+            const COHORT_NAME ='2301-FTB-MT-WEB-FT';
+            const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
+            const tokenKey = localStorage.getItem("token");
+
             try {
                 const response = await fetch(`${BASE_URL}/posts`, {
                         method: "POST",
