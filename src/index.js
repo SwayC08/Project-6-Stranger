@@ -41,7 +41,7 @@ const Main = ()=> {
                 <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } /> }/>
 
                 <Route path ="/CreateNewPost" element={ <CreateNewPost posts={ posts }/> }/>
-                <Route path ="/Logout" element={ <Logout/> }/>
+                <Route path ="/Logout" element={ <Logout loggedIn={loggedIn} setLoggedIn={ setLoggedIn } posts={posts} /> }/>
                 <Route path ="/NewUser" element={ <NewUser loggedIn={ loggedIn }/> }/>
                 {/* <Route path ="/Navbar" element={ <Navbar/> }/> */}
             </Routes>
