@@ -35,6 +35,8 @@ const NewUser = () => {
                 })
             })
             const transData = await response.json();
+            console.log("this the data");
+            console.log(transData);
 
             if (!transData.success){
                 alert("New Account was not registered. Please try again.");
