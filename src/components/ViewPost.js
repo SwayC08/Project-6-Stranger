@@ -1,13 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ViewPost = (props) => {
-    const { posts, setPosts, loggedIn } = props;
+    const { posts, setPosts, loggedIn, update } = props;
     const { _id } = useParams();
     // console.log(useParams());
 
 // Toggle Edit button state 
     const [editState, setEditState] = useState(false);
+
+// Update Post state 
+    const [updateState, setUpdateState] = useState(false);    
 
 // Delete Post state 
     const [deleteState, setDeleteState] = useState([]);
@@ -38,34 +41,10 @@ const ViewPost = (props) => {
         setEditState(!editState)
     };
 
-
-
-// delete (button) 
-// function deleteReq() {
-
-    const deletePost = async (event) => {
-        event.preventDefault();
-        try {
-        const response = await fetch(`${BASE_URL}/posts/${_id}`, {
-            method: "DELETE",
-            headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${tokenKey}`
-            }
-        });
-            const transData = await response.json();
-            console.log(transData);
-            if (!transData.success){
-                alert("Post was not deleted. Please try again.");
-            } else {
-                alert("Post was successfully deleted.");
-                nav("/")
-            }
-        } catch(error){
-            console.log(error)
-        }
-    };
-// };
+    useEffect(()=>{
+        // update()
+        console.log("I was activated")
+}, [updateState])
 
 // Update request 
     const patchReq = async (event) => {
@@ -89,6 +68,7 @@ const ViewPost = (props) => {
         });
             const transData = await response.json();
             console.log(transData);
+            // return transData
 
             // function updatePostData(){
             //     let updateArr =[];
@@ -116,6 +96,34 @@ const ViewPost = (props) => {
             console.log(error);
         }
     };
+
+    // delete (button) 
+// function deleteReq() {
+    const deletePost = async (event) => {
+        event.preventDefault();
+        try {
+        const response = await fetch(`${BASE_URL}/posts/${_id}`, {
+            method: "DELETE",
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${tokenKey}`
+            }
+        });
+            const transData = await response.json();
+            console.log(transData);
+            if (!transData.success){
+                alert("Post was not deleted. Please try again.");
+            } else {
+                alert("Post was successfully deleted.");
+                // nav("/")
+            }
+        } catch(error){
+            console.log(error)
+        }
+    };
+    // };
+
+
 
     return(
         <div>
@@ -158,7 +166,7 @@ const ViewPost = (props) => {
                                             setNewPostDesc(event.target.value);
                                         }}
                                     />
-                                    <button type="submit">Submit</button>
+                                    <button type="submit" onClick={() => setUpdateState(!updateState)}>Submit</button>
                                 </form>
                             ): ""
                         }

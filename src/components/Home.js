@@ -41,12 +41,8 @@ const Home = (props) => {
         };
     }, [])
 
-
     console.log(typeof data);
-    // let userPosts = data.posts;
     console.log(data.posts);
-    // let userMessage = data.messages;
-    // console.log(data.messages);
 
     return(
         <div>
@@ -59,10 +55,10 @@ const Home = (props) => {
                     <h4 >My Posts:</h4>
                     {
                         myPosts.length ? 
-                        myPosts.map((onePost,index)=>{
+                        myPosts.map((onePost)=>{
                             return(
                                 <div className='myPosts'>
-                                    <div key={index}>
+                                    <div key={onePost._id}>
                                         Post: <Link to={`/${onePost._id}`}> { onePost.title }</Link>
                                     </div>
                                     
@@ -73,9 +69,9 @@ const Home = (props) => {
                     }
                     <h4>My Messages:</h4>
                     {
-                        myMess.length ? myMess.map((oneMessage, idx)=>{
+                        myMess.length ? myMess.map((oneMessage)=>{
                             return(
-                                <div key={idx} className='myMess'>
+                                <div key={oneMessage._id} className='myMess'>
                                     <div>From: { oneMessage.fromUser.username }</div>
                                     <div>Message: { oneMessage.content }</div>
                                     <div>

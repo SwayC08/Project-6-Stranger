@@ -25,6 +25,8 @@ const Main = ()=> {
         }
     }
 
+    // let update = fetchPosts();
+
     useEffect(()=>{
         fetchPosts();
 }, [])
@@ -40,11 +42,11 @@ const Main = ()=> {
                 
                 <Route path ="/" element={ <Posts posts={ posts } loggedIn={ loggedIn }/> }/>
 
-                <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } /> }/>
+                <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn }  /> }/>
 
                 <Route path ="/CreateNewPost" element={ <CreateNewPost posts={ posts }/> }/>
                 <Route path ="/Logout" element={ <Logout loggedIn={loggedIn} setLoggedIn={ setLoggedIn } posts={posts} /> }/>
-                <Route path ="/NewUser" element={ <NewUser loggedIn={ loggedIn }/> }/>
+                <Route path ="/NewUser" element={ <NewUser loggedIn={ loggedIn }  /> }/>
                 {/* <Route path ="/Navbar" element={ <Navbar/> }/> */}
             </Routes>
         </BrowserRouter>
