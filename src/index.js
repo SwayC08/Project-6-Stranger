@@ -27,7 +27,7 @@ const Main = ()=> {
 
     useEffect(()=>{
         fetchPosts();
-}, [], posts)
+}, [])
     
     return(
         <BrowserRouter>

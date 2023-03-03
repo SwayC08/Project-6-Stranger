@@ -3,16 +3,23 @@ import { useState } from "react";
 
 const ViewPost = (props) => {
     const { posts, setPosts, loggedIn } = props;
-    const [editStat, setEditStat] = useState(false);
     const { _id } = useParams();
     // console.log(useParams());
 
+// Toggle Edit button state 
+    const [editState, setEditState] = useState(false);
+
+// Delete Post state 
+    const [deleteState, setDeleteState] = useState([]);
+
+// Filter by _id
     let filterPosts;
     filterPosts = props.posts.filter((onePost) => {
         return onePost._id == _id
     });
 
-// state set to pre-existing if empty 
+
+// Update Post state (set to pre-existing if empty) 
     const [newPostNam , setNewPostNam] = useState(
         filterPosts.length ? filterPosts[0].title : ""
     );
@@ -20,16 +27,45 @@ const ViewPost = (props) => {
         filterPosts.length ? filterPosts[0].description : ""
     );
 
-// toggle Edit form (button) 
-    function togEditFrmFnc() {
-        setEditStat(!editStat)
-    };
-
     const nav = useNavigate();
 
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
     const tokenKey = localStorage.getItem("token");
+
+// toggle Edit form (button) 
+    function togEditFrmFnc() {
+        setEditState(!editState)
+    };
+
+
+
+// delete (button) 
+// function deleteReq() {
+
+    const deletePost = async (event) => {
+        event.preventDefault();
+        try {
+        const response = await fetch(`${BASE_URL}/posts/${_id}`, {
+            method: "DELETE",
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${tokenKey}`
+            }
+        });
+            const transData = await response.json();
+            console.log(transData);
+            if (!transData.success){
+                alert("Post was not deleted. Please try again.");
+            } else {
+                alert("Post was successfully deleted.");
+                nav("/")
+            }
+        } catch(error){
+            console.log(error)
+        }
+    };
+// };
 
 // Update request 
     const patchReq = async (event) => {
@@ -95,12 +131,12 @@ const ViewPost = (props) => {
                             (
                                 <div>
                                     <button onClick={ togEditFrmFnc }>Edit </button>
-                                    {/* <button onClick={ deleteReq }>Delete </button> */}
+                                    <button onClick={ deletePost }>Delete </button>
                                 </div>
                             )
                         }
                         {
-                            editStat ? (
+                            editState ? (
                                 <form onSubmit={ patchReq }>
                                     <h3>Update Post</h3>
                                     <input 
