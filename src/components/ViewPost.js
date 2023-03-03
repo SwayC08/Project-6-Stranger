@@ -3,12 +3,13 @@ import { useState } from "react";
 
 const ViewPost = (props) => {
     const { posts, setPosts, loggedIn } = props;
-    // console.log(props);
+    console.log(posts);
 
     const [editStat, setEditStat] = useState(false);
 
-    const { _id } = useParams();
-    // console.log(useParams());
+    const { _id, author } = useParams();
+    console.log(useParams());
+        // console.log(author);
 
     let filterPosts;
 
@@ -16,15 +17,15 @@ const ViewPost = (props) => {
         return onePost._id == _id
     });
     // console.log(filterPosts);
+
 // state set to pre-existing title if empty 
     const [newPostNam , setNewPostNam] = useState(
         filterPosts.length ? filterPosts[0].title : ""
     );
-// state set to pre-existing description if empty
     const [newPostDesc, setNewPostDesc] = useState(
         filterPosts.length ? filterPosts[0].description : ""
     );
-// toggle Edit form from button 
+// toggle Edit form (button) 
     function togEditFrmFnc() {
         setEditStat(!editStat)
     };
@@ -33,46 +34,53 @@ const ViewPost = (props) => {
 
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
+    const tokenKey = localStorage.getItem("token");
 
 // Update request 
-    async function putReqUpdateFnc (event){
+    const patchReq = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`${BASE_URL}/posts/${_id}`,
-                {
-                    method: "PUT",
-                    header: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        title: newPostNam,
-                        description: newPostDesc,
-                    })
-                }
-            ); 
+        const response = await fetch(`${BASE_URL}/posts/${_id}`, {
+            method: "PATCH",
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${tokenKey}`
+            },
+            body: JSON.stringify({
+            post: {
+                title: newPostNam,
+                description: newPostDesc,
+                // price: "$480.00",
+                // location: "New York, NY",
+                // willDeliver: true
+            }
+            })
+        });
             const transData = await response.json();
-            // console.log(transData);
+            console.log(transData);
 
-// API temp editing workaround
-            // function updatePostData(){
-            //     let upArr =[];
-            //     for (let i=0; 0>props.posts.length; i++){
-            //         let currentPost = props.posts[i];
-            //         if (currentPost._id != _id){
-            //             upArr.push(currentPost);
-            //         } else{
-            //             upArr.push(transData);
-            //         }
-            //     }
-            //     return upArr;
-            // };
-            // const newPostData = updatePostData();
+            function updatePostData(){
+                let upArr =[];
+                for (let i=0; 0>props.posts.length; i++){
+                    let currentPost = props.posts[i];
+                    if (currentPost._id != _id){
+                        upArr.push(currentPost);
+                    } else{
+                        upArr.push(transData);
+                    }
+                }
+                return upArr;
+            };
+            const newPostData = updatePostData();
             // props.setPosts(newPostData);
 
-            props.setPosts(transData);
-
-            nav("/");
-
+            if (!transData.success){
+                alert("Post was not edited. Please try again. ");
+            } else {
+                alert("Post was successfully edited.");
+                props.setPosts(newPostData);
+                nav("/");
+            }    
         } catch (error){
             console.log(error);
         }
@@ -89,17 +97,25 @@ const ViewPost = (props) => {
                         <div>Price: {filterPosts[0].price}</div>
                         <div>Created On: {filterPosts[0].createdAt}</div>
                         { !loggedIn ? <div></div> : 
-                        <button onClick={ togEditFrmFnc }>Edit </button>
+                            (
+                                <div>
+                                    <button onClick={ togEditFrmFnc }>Edit </button>
+                                    {/* <button onClick={ deleteReq }>Delete </button> */}
+                                </div>
+                            )
                         }
                         {
                             editStat ? (
-                                <form onSubmit={ putReqUpdateFnc }>
+                                <form onSubmit={ patchReq }>
                                     <h3>Update Post</h3>
-                                    <input type="text" value={ newPostNam } onChange={(event)=>{
-                                        console.log(event.target.value);
+                                    <input 
+                                        type="text" 
+                                        value={ newPostNam }
+                                        placeholder={filterPosts[0].title} 
+                                        onChange={(event)=>{
                                         setNewPostNam(event.target.value);
-                                    }}
-                                    placeholder={filterPosts[0].title}
+                                        }}
+                                        
                                     />
                                     <textarea 
                                         type="text" 
@@ -108,7 +124,6 @@ const ViewPost = (props) => {
                                         value={ newPostDesc }
                                         placeholder={filterPosts[0].description}
                                         onChange={(event)=>{
-                                            console.log(event.target.value);
                                             setNewPostDesc(event.target.value);
                                         }}
                                     />
@@ -124,3 +139,20 @@ const ViewPost = (props) => {
 }
 
 export default ViewPost;
+
+
+// API temp editing workaround
+            // function updatePostData(){
+            //     let upArr =[];
+            //     for (let i=0; 0>props.posts.length; i++){
+            //         let currentPost = props.posts[i];
+            //         if (currentPost._id != _id){
+            //             upArr.push(currentPost);
+            //         } else{
+            //             upArr.push(transData);
+            //         }
+            //     }
+            //     return upArr;
+            // };
+            // const newPostData = updatePostData();
+            // props.setPosts(newPostData);

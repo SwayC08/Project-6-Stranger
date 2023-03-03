@@ -8,23 +8,17 @@ const Profile = (props) => {
     const [createDesc, setCreateDesc ] = useState("");
     const [createPrice, setCreatePrice ] = useState("");
 
-// toggle Create form button 
+// toggle Create form (button) 
     function togCreateFrmFnc() {
         setCreateStat(!createStat)
     };
 
     const nav = useNavigate();
 
-    console.log(localStorage.getItem("token"));
-
 // Auth Check
     useEffect(()=> {
         if (localStorage.getItem("token")){
-            console.log(props);
-            console.log(localStorage.getItem("token"));
-            
             props.setLoggedIn(true);
-
         } else {
             props.setLoggedIn(false);
             console.log("No Token Exists");
@@ -34,7 +28,6 @@ const Profile = (props) => {
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
     const tokenKey = localStorage.getItem("token");
-    console.log("This is the token key" + typeof tokenKey)
 
 // Create request
     const createReqFnc = async (event) => {
@@ -62,7 +55,7 @@ const Profile = (props) => {
                 alert("Post was not created. Please try again. ");
             } else {
 //spread op (clone) + new post 
-                props.setPosts([...props.posts, translatedData]);
+                props.setPosts([...props.posts, translatedData.data]);
                 // props.setPosts(translatedData);
                 alert("Post was successfully created.");
 // reset form
@@ -71,7 +64,7 @@ const Profile = (props) => {
                 setCreateDesc("")
                 setCreatePrice("")
 // nav to posts
-                // nav("/")
+                nav("/")
             }
         } catch (error){
             console.log(error);
@@ -121,6 +114,8 @@ const Profile = (props) => {
                         </form>
                     ): ""
                 } 
+            </div>
+            <div>
             </div>
         </div>
     );

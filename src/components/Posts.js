@@ -9,7 +9,7 @@ const Post = (props) => {
     const [search, setSearch] = useState("");
 
     let filteredPosts = posts.filter((searchPost)=> {
-        // let lowercase = singlePost.title.toLowerCase();
+        // let lowercase = searchPost.title.toLowerCase();
         // return lowercase.includes(search.toLowerCase())
         return ((searchPost.title.toLowerCase()).includes(search.toLowerCase()))
     })
