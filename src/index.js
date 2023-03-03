@@ -7,7 +7,7 @@ import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, N
 const Main = ()=> {
     const [posts, setPosts] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
-    
+
 
 
     const COHORT_NAME ='2301-ftb-mt-web-ft';
@@ -27,7 +27,7 @@ const Main = ()=> {
 
     useEffect(()=>{
         fetchPosts();
-    }, [])
+}, [], posts)
     
     return(
         <BrowserRouter>

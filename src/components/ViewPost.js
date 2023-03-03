@@ -3,28 +3,23 @@ import { useState } from "react";
 
 const ViewPost = (props) => {
     const { posts, setPosts, loggedIn } = props;
-    console.log(posts);
-
     const [editStat, setEditStat] = useState(false);
-
-    const { _id, author } = useParams();
-    console.log(useParams());
-        // console.log(author);
+    const { _id } = useParams();
+    // console.log(useParams());
 
     let filterPosts;
-
     filterPosts = props.posts.filter((onePost) => {
         return onePost._id == _id
     });
-    // console.log(filterPosts);
 
-// state set to pre-existing title if empty 
+// state set to pre-existing if empty 
     const [newPostNam , setNewPostNam] = useState(
         filterPosts.length ? filterPosts[0].title : ""
     );
     const [newPostDesc, setNewPostDesc] = useState(
         filterPosts.length ? filterPosts[0].description : ""
     );
+
 // toggle Edit form (button) 
     function togEditFrmFnc() {
         setEditStat(!editStat)
@@ -59,26 +54,26 @@ const ViewPost = (props) => {
             const transData = await response.json();
             console.log(transData);
 
-            function updatePostData(){
-                let upArr =[];
-                for (let i=0; 0>props.posts.length; i++){
-                    let currentPost = props.posts[i];
-                    if (currentPost._id != _id){
-                        upArr.push(currentPost);
-                    } else{
-                        upArr.push(transData);
-                    }
-                }
-                return upArr;
-            };
-            const newPostData = updatePostData();
-            // props.setPosts(newPostData);
+            // function updatePostData(){
+            //     let updateArr =[];
+            //     for (let i=0; 0>props.posts.length; i++){
+            //         let currentPost = props.posts[i];
+            //         if (currentPost._id != _id){
+            //             updateArr.push(currentPost);
+            //         } else{
+            //             updateArr.push(transData);
+            //         }
+            //     }
+            //     return updateArr;
+            // };
+            // const newPostData = updatePostData();
 
             if (!transData.success){
                 alert("Post was not edited. Please try again. ");
             } else {
                 alert("Post was successfully edited.");
-                props.setPosts(newPostData);
+                // props.setPosts(newPostData);
+                props.setPosts(transData);
                 nav("/");
             }    
         } catch (error){
