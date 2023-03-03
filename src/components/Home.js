@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 const Home = (props) => {
 
     const[data, setData] = useState([]);
+    const[myPosts, setMyPosts] = useState([]);
+    const[myMess, setMyMess] = useState([]);
 
     const COHORT_NAME ='2301-FTB-MT-WEB-FT';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -20,6 +22,8 @@ const Home = (props) => {
             console.log(transData);
             console.log(transData.data);
             setData(transData.data);
+            setMyPosts(transData.data.posts);
+            setMyMess(transData.data.messages);
         } catch(error){
             console.log(error);
         }
@@ -50,27 +54,31 @@ const Home = (props) => {
                     props.loggedIn ? (
                 <div>
                     <h2>Welcome to Local Listings, { data.username }</h2>
+                    <h4>My Posts:</h4>
                     {
-                        // data.post.length ? 
-                        // userPosts.map((onePost)=>{
-                        //     return(
-                        //         <div>
-                        //             <div>Post: { onePost.title }</div>
-                        //         </div>
-                        //     )
-                        // })
-                        // : <div>No Data Available</div>
+                        myPosts.length ? 
+                        myPosts.map((onePost,index)=>{
+                            return(
+                                <div key={index}>
+                                    <div>Post: { onePost.title }</div>
+                                </div>
+                            )
+                        })
+                        : <div>No Data Available</div>
                     }
-                    {/* {
-                        userMessage.length ? userMessage.map((oneMessage)=>{
+                    <h4>My Messages:</h4>
+                    {
+                        myMess.length ? myMess.map((oneMessage)=>{
                             return(
                                 <div>
                                     
-                                    <div>MSG: { oneMessage.fromUser.username }</div>
+                                    <div>From: { oneMessage.fromUser.username }</div>
+                                    <div>Message: { oneMessage.content }</div>
+                                    <div>Regarding your Post: { oneMessage.post.title }</div>
                                 </div>
                             )
                         }): <div>No Data Available</div>
-                    }  */}
+                    } 
                 </div>
                 ): 
                 // <p>This site is dedicated to serving the local community.</p>
@@ -87,9 +95,6 @@ const Home = (props) => {
 
 export default Home; 
 
-
-// <div>
-// <h4>My Posts:</h4>
 
 
 // </div>
@@ -108,15 +113,3 @@ export default Home;
 // </div>
 
 
-
-
-// {
-//     userMessage.length ? userMessage.map((oneMessage)=>{
-//         return(
-//             <div>
-                
-//                 {/* <div>MSG: { oneMessage.fromUser }</div> */}
-//             </div>
-//         )
-//     }): <div>No Data Available</div>
-// }
