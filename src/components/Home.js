@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
 
@@ -54,13 +55,17 @@ const Home = (props) => {
                     props.loggedIn ? (
                 <div>
                     <h2>Welcome to Local Listings, { data.username }</h2>
-                    <h4>My Posts:</h4>
+                    <hr/>
+                    <h4 >My Posts:</h4>
                     {
                         myPosts.length ? 
                         myPosts.map((onePost,index)=>{
                             return(
-                                <div key={index}>
-                                    <div>Post: { onePost.title }</div>
+                                <div className='myPosts'>
+                                    <div key={index}>
+                                        Post: <Link to={`/${onePost._id}`}> { onePost.title }</Link>
+                                    </div>
+                                    
                                 </div>
                             )
                         })
@@ -68,13 +73,16 @@ const Home = (props) => {
                     }
                     <h4>My Messages:</h4>
                     {
-                        myMess.length ? myMess.map((oneMessage)=>{
+                        myMess.length ? myMess.map((oneMessage, idx)=>{
                             return(
-                                <div>
-                                    
+                                <div key={idx} className='myMess'>
                                     <div>From: { oneMessage.fromUser.username }</div>
                                     <div>Message: { oneMessage.content }</div>
-                                    <div>Regarding your Post: { oneMessage.post.title }</div>
+                                    <div>
+                                        Regarding your Post: 
+                                        <Link to={`/${oneMessage.post._id}`}>{ oneMessage.post.title }</Link>
+                                    </div>
+                                    <button>Reply</button>
                                 </div>
                             )
                         }): <div>No Data Available</div>
