@@ -53,7 +53,7 @@ const ViewPost = (props) => {
     };
 
     useEffect(()=>{
-        console.log("I was activated")
+        console.log("I was activated in ViewPost")
         
     }, [updateState])
 
@@ -88,7 +88,7 @@ const ViewPost = (props) => {
             //         if (currentPost._id != _id){
             //             updateArr.push(currentPost);
             //         } else{
-            //             updateArr.push(transData);
+            //             updateArr.push(transData.data.post);
             //         }
             //     }
             //     return updateArr;
@@ -100,7 +100,7 @@ const ViewPost = (props) => {
             } else {
                 alert("Post was successfully edited.");
                 // props.setPosts(newPostData);
-                props.setPosts(transData);
+                props.setPosts(transData.data.post);
                 nav("/");
             }    
         } catch (error){
@@ -125,7 +125,7 @@ const ViewPost = (props) => {
                 alert("Post was not deleted. Please try again.");
             } else {
                 alert("Post was successfully deleted.");
-                // nav("/")
+                nav("/")
             }
         } catch(error){
             console.log(error)
@@ -155,8 +155,8 @@ const ViewPost = (props) => {
             } else {
                 alert("Reply was successfully sent.");
                 // props.setPosts(newPostData);
-                props.setPosts(transData);
-                nav("/");
+                props.setPosts(transData.data.post);
+                nav("/Home");
             }    
         } catch (error){
             console.log(error);
@@ -173,7 +173,7 @@ const ViewPost = (props) => {
                         <div>Description: {filterPosts[0].description}</div>
                         <div>Price: {filterPosts[0].price}</div>
                         <div>Created On: {filterPosts[0].createdAt}</div>
-                        <Link to={"/"}>Back</Link>
+                        <Link to={"/"}>Back to Posts</Link>
                         { !loggedIn ? <div></div> : 
                             (
                                 <div>

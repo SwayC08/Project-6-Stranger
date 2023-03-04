@@ -25,7 +25,7 @@ const Main = ()=> {
 
     useEffect(()=>{
         fetchPosts();
-}, [])
+}, [posts])
     
     return(
         <BrowserRouter>
@@ -36,7 +36,7 @@ const Main = ()=> {
 
                 <Route path ="/Profile" element={ <Profile posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn }/> }/>
                 
-                <Route path ="/" element={ <Posts posts={ posts } /> }/>
+                <Route path ="/" element={ <Posts posts={ posts } setPosts={ setPosts } /> }/>
 
                 <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn }  /> }/>
 

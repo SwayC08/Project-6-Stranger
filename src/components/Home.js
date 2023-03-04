@@ -11,6 +11,18 @@ const Home = (props) => {
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
     const tokenKey = localStorage.getItem("token");
 
+    // Auth Check
+    useEffect(()=> {
+        if (localStorage.getItem("token")){
+            props.setLoggedIn(true);
+            fetchData();
+            
+        } else {
+            props.setLoggedIn(false);
+            console.log("No Token Exists");
+        };
+    }, [])
+
     async function fetchData(){
         try {
             const response = await fetch(`${BASE_URL}/users/me`, {
@@ -29,20 +41,7 @@ const Home = (props) => {
             console.log(error);
         }
     }
-// Auth Check
-    useEffect(()=> {
-        if (localStorage.getItem("token")){
-            props.setLoggedIn(true);
-            fetchData();
-            
-        } else {
-            props.setLoggedIn(false);
-            console.log("No Token Exists");
-        };
-    }, [])
 
-    console.log(typeof data);
-    console.log(data.posts);
 
     return(
         <div>
@@ -59,7 +58,11 @@ const Home = (props) => {
                             return(
                                 <div key={onePost._id} className='myPosts'>
                                     <div >
-                                        Post: <Link to={`/${onePost._id}`}> { onePost.title }</Link>
+                                        Name: <Link to={`/${onePost._id}`}> { onePost.title }</Link>
+                                        
+                                    </div>
+                                    <div>
+                                        Created: { onePost.createdAt }
                                     </div>
                                     
                                 </div>
@@ -67,21 +70,23 @@ const Home = (props) => {
                         })
                         : <div>No Data Available</div>
                     }
-                    <h4>My Messages:</h4>
-                    {
-                        myMess.length ? myMess.map((oneMessage)=>{
-                            return(
-                                <section key={oneMessage._id} className='myMess'>
-                                    <div>From: { oneMessage.fromUser.username }</div>
-                                    <div>Message: { oneMessage.content }</div>
-                                    <div>
-                                        Regarding your Post: 
-                                        <Link to={`/${oneMessage.post._id}`}>{ oneMessage.post.title }</Link>
-                                    </div>
-                                </section>
-                            )
-                        }): <div>No Data Available</div>
-                    } 
+                    <div className="messageSection">
+                        <h4>My Messages:</h4>
+                        {
+                            myMess.length ? myMess.map((oneMessage)=>{
+                                return(
+                                    <section key={oneMessage._id} className='myMess'>
+                                        <div>From: { oneMessage.fromUser.username }</div>
+                                        <div>Message: { oneMessage.content }</div>
+                                        <div>
+                                            Regarding this Post: 
+                                            <Link to={`/${oneMessage.post._id}`}>{ oneMessage.post.title } </Link>
+                                        </div>
+                                    </section>
+                                )
+                            }): <div>No Data Available</div>
+                        } 
+                    </div>
                 </div>
                 ): 
                 <div>

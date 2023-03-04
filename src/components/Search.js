@@ -4,6 +4,7 @@ const Search = (props) => {
 
     const { setSearch} = props
 
+
     return (
         <div>
             <div>Search</div>

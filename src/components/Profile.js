@@ -2,14 +2,15 @@ import { useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
 const Profile = (props) => {
-    console.log(props);
+    // console.log(props);
+    const { posts, setPosts} = props;
     const [createStat, setCreateStat] = useState(false);
     const [createTitle, setCreateTitle ] = useState("");
     const [createDesc, setCreateDesc ] = useState("");
     const [createPrice, setCreatePrice ] = useState("");
 
 // toggle Create form (button) 
-    function togCreateFrmFnc() {
+    function toggleCreate() {
         setCreateStat(!createStat)
     };
 
@@ -19,6 +20,7 @@ const Profile = (props) => {
     useEffect(()=> {
         if (localStorage.getItem("token")){
             props.setLoggedIn(true);
+            console.log("I was ran in profile");
         } else {
             props.setLoggedIn(false);
             console.log("No Token Exists");
@@ -30,7 +32,7 @@ const Profile = (props) => {
     const tokenKey = localStorage.getItem("token");
 
 // Create request
-    const createReqFnc = async (event) => {
+    const createReq = async (event) => {
         event.preventDefault();
         try {
             const response = await fetch(`${BASE_URL}/posts`, {
@@ -55,7 +57,8 @@ const Profile = (props) => {
                 alert("Post was not created. Please try again. ");
             } else {
 //spread op (clone) + new post 
-                props.setPosts([...props.posts, translatedData.data]);
+                // props.setPosts([...props.posts, translatedData.data]);
+                setPosts([translatedData, ...posts,]);
                 // props.setPosts(translatedData);
                 alert("Post was successfully created.");
 // reset form
@@ -76,10 +79,10 @@ const Profile = (props) => {
         <div>
             <div>My Profile</div>
             <div>
-                <button onClick={ togCreateFrmFnc }>Create New Post</button>
+                <button onClick={ toggleCreate }>Create New Post</button>
                 {
                     createStat ? (
-                        <form onSubmit={ createReqFnc }>
+                        <form onSubmit={ createReq }>
                             <h3>Create New Post</h3>
                             <input 
                                 type="text"
