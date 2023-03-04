@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = (props) => {
     // console.log(props);
-    const { posts, setPosts} = props;
+    const { posts, setPosts, fetchPosts} = props;
     const [createStat, setCreateStat] = useState(false);
     const [createTitle, setCreateTitle ] = useState("");
     const [createDesc, setCreateDesc ] = useState("");
@@ -20,6 +20,7 @@ const Profile = (props) => {
     useEffect(()=> {
         if (localStorage.getItem("token")){
             props.setLoggedIn(true);
+            fetchPosts();
             console.log("I was ran in profile");
         } else {
             props.setLoggedIn(false);
@@ -27,13 +28,16 @@ const Profile = (props) => {
         };
     }, []);
 
-    const COHORT_NAME ='2301-FTB-MT-WEB-FT';
-    const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
-    const tokenKey = localStorage.getItem("token");
+    
 
 // Create request
     const createReq = async (event) => {
         event.preventDefault();
+
+    const COHORT_NAME ='2301-FTB-MT-WEB-FT';
+    const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
+    const tokenKey = localStorage.getItem("token");
+
         try {
             const response = await fetch(`${BASE_URL}/posts`, {
                 method: "POST",
@@ -50,15 +54,15 @@ const Profile = (props) => {
                 }
                 })
             });
-            const translatedData = await response.json();
-            console.log(translatedData);
+            const transData = await response.json();
+            console.log(transData);
 
-            if (!translatedData.success){
+            if (!transData.success){
                 alert("Post was not created. Please try again. ");
             } else {
 //spread op (clone) + new post 
-                // props.setPosts([...props.posts, translatedData.data]);
-                setPosts([translatedData, ...posts,]);
+                props.setPosts([...props.posts, transData.data]);
+                // setPosts([...posts, transData.data]);
                 // props.setPosts(translatedData);
                 alert("Post was successfully created.");
 // reset form

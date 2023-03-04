@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const ViewPost = (props) => {
-    const { posts, setPosts, loggedIn} = props;
+    const { posts, setPosts, loggedIn, setUpdateState, updateState, fetchPosts} = props;
 
     const { _id } = useParams();
     // console.log(useParams());
@@ -13,7 +13,7 @@ const ViewPost = (props) => {
     const [replyState, setReplyState] = useState(false);
 
 // Update Post state 
-    const [updateState, setUpdateState] = useState(false);    
+// const [updateState, setUpdateState] = useState(false);    
 
 // Delete Post state 
     const [deleteState, setDeleteState] = useState([]);
@@ -22,10 +22,12 @@ const ViewPost = (props) => {
     const [replyContent, setReplyContent] = useState("");
 
 // Filter by _id
-    let filterPosts;
-    filterPosts = props.posts.filter((onePost) => {
+    let filterPosts = props.posts.filter((onePost) => {
         return onePost._id == _id
     });
+    console.log(filterPosts);
+    // setPosts(filterPosts);
+
 
 
 // Update Post state (set to pre-existing if empty) 
@@ -52,10 +54,25 @@ const ViewPost = (props) => {
         setReplyState(!replyState)
     };
 
+// Toggle Edit form (button) 
+    function newRequest() {
+        setUpdateState(!updateState);
+        // window.location.reload(false);
+    };
+
+    useEffect(() => {
+        console.log(" ViewPost  Update");
+        // patchReq;
+        // setPosts(posts);
+        // setPosts(filteredPosts);
+        // console.log(filteredPosts);
+    },[updateState])
+
+
     useEffect(()=>{
         console.log("I was activated in ViewPost")
-        
-    }, [updateState])
+        fetchPosts();
+    }, [])
 
 // Update request 
     const patchReq = async (event) => {
@@ -79,30 +96,31 @@ const ViewPost = (props) => {
             });
             const transData = await response.json();
             console.log(transData);
-            // return transData
-
-            // function updatePostData(){
-            //     let updateArr =[];
-            //     for (let i=0; 0>props.posts.length; i++){
-            //         let currentPost = props.posts[i];
-            //         if (currentPost._id != _id){
-            //             updateArr.push(currentPost);
-            //         } else{
-            //             updateArr.push(transData.data.post);
-            //         }
-            //     }
-            //     return updateArr;
-            // };
-            // const newPostData = updatePostData();
 
             if (!transData.success){
                 alert("Post was not edited. Please try again. ");
             } else {
+
+                function updatePostData(){
+                    let updateArr =[];
+                    for (let i=0; 0>props.posts.length; i++){
+                        let currentPost = props.posts[i];
+                        if (currentPost._id != _id){
+                            updateArr.push(currentPost);
+                        } else{
+                            updateArr.push(transData.data.post);
+                        }
+                    }
+                    return updateArr;
+                };
+                const newPostData = updatePostData();
+                props.setPosts(newPostData);
                 alert("Post was successfully edited.");
-                // props.setPosts(newPostData);
+                
                 props.setPosts(transData.data.post);
+                fetchPosts ();
                 nav("/");
-            }    
+            }
         } catch (error){
             console.log(error);
         }
@@ -125,6 +143,12 @@ const ViewPost = (props) => {
                 alert("Post was not deleted. Please try again.");
             } else {
                 alert("Post was successfully deleted.");
+// Filter by _id
+                // let filterPosts;
+                // filterPosts = props.posts.filter((onePost) => {
+                //     return onePost._id == _id
+                // });
+                setPosts(filterPosts);
                 nav("/")
             }
         } catch(error){
@@ -207,7 +231,7 @@ const ViewPost = (props) => {
                                             setNewPostDesc(event.target.value);
                                         }}
                                     />
-                                    <button type="submit" onClick={() => setUpdateState(!updateState)}>Submit</button>
+                                    <button type="submit" onClick={ newRequest }>Submit</button>
                                 </form>
                             ): ""
                         }
@@ -241,6 +265,8 @@ const ViewPost = (props) => {
 }
 
 export default ViewPost;
+
+// () => setUpdateState(!updateState)
 
 // API temp editing workaround
             // function updatePostData(){

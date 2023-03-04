@@ -8,6 +8,10 @@ const Main = ()=> {
     const [posts, setPosts] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
 
+// Update Post state 
+    const [updateState, setUpdateState] = useState(false); 
+
+
     const COHORT_NAME ='2301-ftb-mt-web-ft';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
@@ -18,6 +22,7 @@ const Main = ()=> {
             const response = await fetch(`${BASE_URL}/posts`);
             const transData = await response.json();
             setPosts(transData.data.posts);
+            
         } catch (error){
             console.log(error)
         }
@@ -25,7 +30,8 @@ const Main = ()=> {
 
     useEffect(()=>{
         fetchPosts();
-}, [posts])
+        console.log("I was ran in Index")
+}, [])
     
     return(
         <BrowserRouter>
@@ -34,17 +40,17 @@ const Main = ()=> {
                 <Route path ="/Login" element={ <Login/> }/>
                 <Route path ="/Home" element={ <Home posts={ posts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn } /> }/>
 
-                <Route path ="/Profile" element={ <Profile posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn }/> }/>
+                <Route path ="/Profile" element={ <Profile posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } setLoggedIn={ setLoggedIn } fetchPosts={ fetchPosts } /> }/>
                 
-                <Route path ="/" element={ <Posts posts={ posts } setPosts={ setPosts } /> }/>
+                <Route path ="/" element={ <Posts posts={ posts } setPosts={ setPosts } updateState={ updateState } setUpdateState={ setUpdateState }  fetchPosts={ fetchPosts } /> }/>
 
-                <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn }  /> }/>
+                <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn } updateState={ updateState } setUpdateState={ setUpdateState } fetchPosts={ fetchPosts }/> }/>
 
                 
                 <Route path ="/Logout" element={ <Logout loggedIn={loggedIn} setLoggedIn={ setLoggedIn } posts={posts} /> }/>
                 <Route path ="/NewUser" element={ <NewUser loggedIn={ loggedIn }  /> }/>
                 {/* <Route path ="/Reply" element={ <Reply posts={ posts } /> }/>    */}
-                {/* <Route path ="/Navbar" element={ <Navbar/> }/> */}
+                {/* <Route path ="/Navbar" element={ <Navbar/> }/> */} 
             </Routes>
         </BrowserRouter>
     )

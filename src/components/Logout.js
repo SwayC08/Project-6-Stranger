@@ -8,7 +8,7 @@ const Logout = (props) => {
     useEffect(()=> {
                 if (props.setLoggedIn(true)){
                 localStorage.removeItem("token")
-                nav("/")
+                // nav("/")
                 } else {
                     props.setLoggedIn(false);
                     console.log("No Token Exists");

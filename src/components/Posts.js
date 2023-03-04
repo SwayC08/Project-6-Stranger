@@ -2,27 +2,25 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Search } from "../components";
 
-
 const Post = (props) => {
-    const { posts, setPosts } = props;
+    const { posts, setPosts, setUpdateState, updateState, fetchPosts } = props;
 
     const [searchState, setSearchState]= useState(false)
-
     const [search, setSearch] = useState("");
+    // console.log(search.length);
 
     useEffect(() => {
-        console.log("I was ran in posts");
-
+        console.log("I was ran in posts updateState");
         // setPosts(filteredPosts);
-        // console.log(filteredPosts);
-    },[setPosts])
+        fetchPosts();
+    },[])
 
 // Search Filter
-    let filteredPosts = posts.filter((searchPost)=> {
+    // let filteredPosts = posts.filter((searchPost)=> {
         // let lowercase = searchPost.title.toLowerCase();
         // return lowercase.includes(search.toLowerCase())
-        return ((searchPost.title.toLowerCase()).includes(search.toLowerCase()))
-    });
+    //     return ((searchPost.title.toLowerCase()).includes(search.toLowerCase()))
+    // });
 
     return(
         <div>
@@ -31,21 +29,22 @@ const Post = (props) => {
             <hr/>
             <div>
                 {
-                    search.length ? filteredPosts.map((onePost) => {
+                    posts.length ? posts.map((onePost) => {
                         return (
                             <div key={onePost._id}>
                                 <Link to={`/${onePost._id}`}>  { onePost.title } ({ onePost.price })</Link>
                                 <hr/>
                             </div>
                         )
-                    }) : posts.map((onePost) => {
-                            return (
-                                <div key={onePost._id}>
-                                    <Link to={`/${onePost._id}`}>  { onePost.title } ({ onePost.price })</Link>
-                                    <hr/>
-                                </div>
-                            )
-                        })
+                    }) : "Did Not render update, posts.length does not exist"
+                    // filteredPosts.map((onePost) => {
+                    //     return (
+                    //         <div key={onePost._id}>
+                    //             <Link to={`/${onePost._id}`}>  { onePost.title } ({ onePost.price })</Link>
+                    //             <hr/>
+                    //         </div>
+                    //     )
+                    // })
                 }
             </div>
         </div>
