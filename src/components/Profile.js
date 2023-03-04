@@ -64,7 +64,7 @@ const Profile = (props) => {
                 setCreateDesc("")
                 setCreatePrice("")
 // nav to posts
-                nav("/")
+                // nav("/")
             }
         } catch (error){
             console.log(error);

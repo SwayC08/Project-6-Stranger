@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import { Home, Profile, Posts, Login, Logout, CreateNewPost, Header, ViewPost, NewUser} from "./components";
+import { Home, Profile, Posts, Login, Logout, Header, ViewPost, NewUser} from "./components";
 
 const Main = ()=> {
     const [posts, setPosts] = useState([]);
@@ -40,7 +40,7 @@ const Main = ()=> {
 
                 <Route path ="/:_id" element={ <ViewPost posts={ posts } setPosts={ setPosts } loggedIn={ loggedIn }  /> }/>
 
-                <Route path ="/CreateNewPost" element={ <CreateNewPost posts={ posts }/> }/>
+                
                 <Route path ="/Logout" element={ <Logout loggedIn={loggedIn} setLoggedIn={ setLoggedIn } posts={posts} /> }/>
                 <Route path ="/NewUser" element={ <NewUser loggedIn={ loggedIn }  /> }/>
                 {/* <Route path ="/Reply" element={ <Reply posts={ posts } /> }/>    */}
