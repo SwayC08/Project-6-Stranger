@@ -80,7 +80,8 @@ const Profile = (props) => {
     // }, [])
 
     return(
-        <div>
+        <div className='Profile'>
+            
             <div>My Profile</div>
             <div>
                 <button onClick={ toggleCreate }>Create New Post</button>

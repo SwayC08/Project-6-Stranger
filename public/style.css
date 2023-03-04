@@ -1,23 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Sahitya:wght@700&display=swap');
+
 * {
+    font-family: 'Sahitya', serif;
+    box-sizing: border-box;
+    
     /* background-color: darkslategrey; */
     height: auto;
 }
+body {
+    margin: 100px;
+    /* margin-top: 130px; */
+    padding-top: 60px;
+    background-color: #3fc0cd;
+    color:#cc481a;
+}
+
+#app{
+    /* background-color: teal; */
+}
+.Header {
+        font-size: 40px;
+        background-color: whitesmoke;
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 35px;
+        padding-right: 35px;
+        align-items: center;
+        overflow: auto;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 150px;
+        border-bottom: 4px outset;
+        color: #cc481a;
+}
+
+
+
+
+.Home {
+    border: dotted yellow;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+    align-items:center;
+    /* overflow: auto; */
+}
 
 .myPosts {
-    height: 30px;
-    background-color: yellow;
-    border: dotted black;
+    height: auto;
+    width: 400px;
+    background-color: whitesmoke;
+    border: solid black;
+    padding: 30px;
     /* overflow-y: auto; */
 }
 
 .myMess {
-    height: 90px;
-    background-color: grey;
-    border: dotted black;
+    height: auto;
+    width: 400px;
+    background-color: rgb(70 70 70);
+    border: solid black;
+    padding: 30px;
 };
 
 .messageSection{
     height: 400px;
-    overflow-y: auto;
-    background-color: green;
+    /* overflow-y: auto; */
 }
+
+.Profile {
+    /* background-color: green; */
+}
+

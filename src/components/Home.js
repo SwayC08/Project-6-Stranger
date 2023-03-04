@@ -44,13 +44,12 @@ const Home = (props) => {
 
 
     return(
-        <div>
+        <div className='Home'>
             <div>
                 {
                     props.loggedIn ? (
                 <div>
                     <h2>Welcome to Local Listings, { data.username }</h2>
-                    <hr/>
                     <h4 >My Posts:</h4>
                     {
                         myPosts.length ? 
@@ -79,7 +78,7 @@ const Home = (props) => {
                                         <div>From: { oneMessage.fromUser.username }</div>
                                         <div>Message: { oneMessage.content }</div>
                                         <div>
-                                            Regarding this Post: 
+                                            Regarding: 
                                             <Link to={`/${oneMessage.post._id}`}>{ oneMessage.post.title } </Link>
                                         </div>
                                     </section>
@@ -95,9 +94,6 @@ const Home = (props) => {
                     <p>You do not need an account to browse postings. </p>
                 </div>
                 }
-            </div>
-            <div>
-            
             </div>
         </div>
     )
