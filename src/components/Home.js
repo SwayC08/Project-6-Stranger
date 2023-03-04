@@ -57,8 +57,8 @@ const Home = (props) => {
                         myPosts.length ? 
                         myPosts.map((onePost)=>{
                             return(
-                                <div className='myPosts'>
-                                    <div key={onePost._id}>
+                                <div key={onePost._id} className='myPosts'>
+                                    <div >
                                         Post: <Link to={`/${onePost._id}`}> { onePost.title }</Link>
                                     </div>
                                     
@@ -71,23 +71,24 @@ const Home = (props) => {
                     {
                         myMess.length ? myMess.map((oneMessage)=>{
                             return(
-                                <div key={oneMessage._id} className='myMess'>
+                                <section key={oneMessage._id} className='myMess'>
                                     <div>From: { oneMessage.fromUser.username }</div>
                                     <div>Message: { oneMessage.content }</div>
                                     <div>
                                         Regarding your Post: 
                                         <Link to={`/${oneMessage.post._id}`}>{ oneMessage.post.title }</Link>
                                     </div>
-                                    <button>Reply</button>
-                                </div>
+                                </section>
                             )
                         }): <div>No Data Available</div>
                     } 
                 </div>
                 ): 
-                // <p>This site is dedicated to serving the local community.</p>
-                // <p>You do not need an account to browse postings. </p>
-                <h2>Please create an account or sign in, if you would like to post a new item.</h2>
+                <div>
+                    <h2>Please create an account or sign in, if you would like to post a new item.</h2>
+                    <p>This site is dedicated to serving the local community.</p>
+                    <p>You do not need an account to browse postings. </p>
+                </div>
                 }
             </div>
             <div>
@@ -99,21 +100,5 @@ const Home = (props) => {
 
 export default Home; 
 
-
-
-// </div>
-//     <div>
-//     <h4>My Messages:</h4>
-//     {/* {
-//         userMessage.length ? userMessage.map((oneMessage)=>{
-//             return(
-//                 <div>
-                    
-//                     <div>MSG: { oneMessage.fromUser.username }</div>
-//                 </div>
-//             )
-//         }): <div>No Data Available</div>
-//     } */}
-// </div>
 
 

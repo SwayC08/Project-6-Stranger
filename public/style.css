@@ -1,16 +1,16 @@
 * {
-    background-color: darkslategrey;
+    /* background-color: darkslategrey; */
     height: auto;
 }
 
 .myPosts {
     height: 30px;
-    /* background-color: white; */
+    background-color: yellow;
     border: dotted black;
 }
 
 .myMess {
     height: 90px;
-    /* background-color: white; */
+    background-color: grey;
     border: dotted black;
 };
