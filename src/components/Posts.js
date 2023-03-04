@@ -6,7 +6,9 @@ import { Search } from "../components";
 const Post = (props) => {
     const { posts, setPosts } = props;
 
-    // const [search, setSearch] = useState("");
+    const [searchState, setSearchState]= useState(false)
+
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         console.log("I was ran in posts");
@@ -16,28 +18,34 @@ const Post = (props) => {
     },[setPosts])
 
 // Search Filter
-    // let filteredPosts = posts.filter((searchPost)=> {
+    let filteredPosts = posts.filter((searchPost)=> {
         // let lowercase = searchPost.title.toLowerCase();
         // return lowercase.includes(search.toLowerCase())
-    //     return ((searchPost.title.toLowerCase()).includes(search.toLowerCase()))
-    // });
+        return ((searchPost.title.toLowerCase()).includes(search.toLowerCase()))
+    });
 
     return(
         <div>
             <h3>All Posts</h3>
-            {/* <Search search={ search } setSearch={ setSearch } posts={ posts } /> */}
+            <Search search={ search } setSearch={ setSearch } posts={ posts } setSearchState={ setSearchState } searchState={ searchState }/>
             <hr/>
             <div>
                 {
-                    posts.length ? posts.map((onePost) => {
-                    // filteredPosts.length ? filteredPosts.map((onePost) => {
+                    search.length ? filteredPosts.map((onePost) => {
                         return (
                             <div key={onePost._id}>
                                 <Link to={`/${onePost._id}`}>  { onePost.title } ({ onePost.price })</Link>
                                 <hr/>
                             </div>
                         )
-                    }) : <div>No Data Available</div>
+                    }) : posts.map((onePost) => {
+                            return (
+                                <div key={onePost._id}>
+                                    <Link to={`/${onePost._id}`}>  { onePost.title } ({ onePost.price })</Link>
+                                    <hr/>
+                                </div>
+                            )
+                        })
                 }
             </div>
         </div>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Search = (props) => {
 
-    const { setSearch} = props
+    const { setSearch, searchState, setSearchState} = props
 
 
     return (
@@ -14,6 +14,7 @@ const Search = (props) => {
                 onChange={(event) => {
                     setSearch(event.target.value)
                 }}
+                onClick={() => setSearchState(!searchState)}
             >
             </input>
         </div>
