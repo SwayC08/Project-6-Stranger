@@ -87,8 +87,8 @@ const Profile = (props) => {
                 <button onClick={ toggleCreate }>Create New Post</button>
                 {
                     createStat ? (
-                        <form onSubmit={ createReq }>
-                            <h3>Create New Post</h3>
+                        <form onSubmit={ createReq } className='createForm'>
+                            {/* <h5 className='createTitle'>Create New Post</h5> */}
                             <input 
                                 type="text"
                                 value={ createTitle }

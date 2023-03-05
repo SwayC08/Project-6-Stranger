@@ -46,46 +46,53 @@ const Home = (props) => {
     return(
         <div className='Home'>
             <div>
-                {
-                    props.loggedIn ? (
-                <div>
-                    <h2>Welcome to Local Listings, { data.username }</h2>
-                    <h4 >My Posts:</h4>
                     {
-                        myPosts.length ? 
-                        myPosts.map((onePost)=>{
-                            return(
-                                <div key={onePost._id} className='myPosts'>
-                                    <div >
-                                        Name: <Link to={`/${onePost._id}`}> { onePost.title }</Link>
-                                        
-                                    </div>
-                                    <div>
-                                        Created: { onePost.createdAt }
-                                    </div>
-                                    
-                                </div>
-                            )
-                        })
-                        : <div>No Data Available</div>
-                    }
-                    <div className="messageSection">
-                        <h4>My Messages:</h4>
-                        {
-                            myMess.length ? myMess.map((oneMessage)=>{
-                                return(
-                                    <section key={oneMessage._id} className='myMess'>
-                                        <div>From: { oneMessage.fromUser.username }</div>
-                                        <div>Message: { oneMessage.content }</div>
-                                        <div>
-                                            Regarding: 
-                                            <Link to={`/${oneMessage.post._id}`}>{ oneMessage.post.title } </Link>
-                                        </div>
-                                    </section>
-                                )
-                            }): <div>No Data Available</div>
-                        } 
+                        props.loggedIn ? (
+                <div className='HomeMain'>
+                    <div className='HomeHeader'>
+                        <h2>Welcome to Local Listings, { data.username }</h2>
                     </div>
+                    <div className='HomeDisplaySection'>
+                        <h3 id="myPostsTitle">My Posts:</h3>
+                        <div className='myPostSection'>  
+                            
+                            {
+                                myPosts.length ? 
+                                myPosts.map((onePost)=>{
+                                    return(
+                                        <div key={onePost._id} className='myPosts'>
+                                            <div >
+                                                Name: <Link to={`/${onePost._id}`}> { onePost.title }</Link>
+                                                
+                                            </div>
+                                            <div>
+                                                Created: { onePost.createdAt }
+                                            </div>
+                                            
+                                        </div>
+                                    )
+                                })
+                                : <div>No Data Available</div>
+                            }
+                        </div> 
+                        <h3 id="myMessagesTitle">My messages:</h3>
+                        <div className='myMessSection'>  
+                            {
+                                myMess.length ? myMess.map((oneMessage)=>{
+                                    return(
+                                        <section key={oneMessage._id} className='myMess'>
+                                            <div>From: { oneMessage.fromUser.username }</div>
+                                            <div>Message: { oneMessage.content }</div>
+                                            <div>
+                                                Regarding: 
+                                                <Link to={`/${oneMessage.post._id}`}>{ oneMessage.post.title } </Link>
+                                            </div>
+                                        </section>
+                                    )
+                                }): <div>No Data Available</div>
+                            } 
+                        </div>
+                    </div> 
                 </div>
                 ): 
                 <div>
@@ -100,6 +107,8 @@ const Home = (props) => {
 }
 
 export default Home; 
+
+
 
 
 

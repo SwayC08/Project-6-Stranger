@@ -188,7 +188,7 @@ const ViewPost = (props) => {
     };
 
     return(
-        <div>
+        <div className="viewPost">
             <h3>Post Details ({filterPosts[0]._id}) </h3>
             {
                 filterPosts.length ? (
@@ -197,7 +197,7 @@ const ViewPost = (props) => {
                         <div>Description: {filterPosts[0].description}</div>
                         <div>Price: {filterPosts[0].price}</div>
                         <div>Created On: {filterPosts[0].createdAt}</div>
-                        <Link to={"/"}>Back to Posts</Link>
+                        <Link to={"/"}><button>Back to Posts</button></Link>
                         { !loggedIn ? <div></div> : 
                             (
                                 <div>
@@ -210,8 +210,8 @@ const ViewPost = (props) => {
 {/* Edit Post */}                        
                         {
                             editState ? (
-                                <form onSubmit={ patchReq }>
-                                    <h3>Update Post</h3>
+                                <form onSubmit={ patchReq } className="editForm">
+                                    {/* <h3>Update Post</h3> */}
                                     <input 
                                         type="text" 
                                         value={ newPostNam }
@@ -239,9 +239,9 @@ const ViewPost = (props) => {
                         {
                             replyState ? (
                             <div>
-                                <div>Reply To Message #</div>
-                                <form onSubmit={ replyMessage }>
-                                    <h3>Message:</h3>
+                                <div>Reply To Message</div>
+                                <form onSubmit={ replyMessage } className="replyForm">
+                                    {/* <h3>Message:</h3> */}
                                     <textarea 
                                         type="text" 
                                         rows="4" 

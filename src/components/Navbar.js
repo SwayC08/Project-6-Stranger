@@ -5,7 +5,7 @@ const Navbar = (props) => {
     const { loggedIn } = props;
 
     return(
-        <div>
+        <div className="NavLinks">
             { loggedIn ? <div></div> : <Link to="/NewUser"> Sign Up </Link> }
             { loggedIn ? <div></div> : <Link to="/Login"> Sign In </Link> }
             <Link to="/Home"> Home </Link>

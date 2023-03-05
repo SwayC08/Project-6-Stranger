@@ -23,17 +23,15 @@ const Post = (props) => {
     // });
 
     return(
-        <div>
-            <h3>All Posts</h3>
-            <Search search={ search } setSearch={ setSearch } posts={ posts } setSearchState={ setSearchState } searchState={ searchState }/>
-            <hr/>
+        <div className="postPage">
+            {/* <h3>All Posts</h3>
+            <Search search={ search } setSearch={ setSearch } posts={ posts } setSearchState={ setSearchState } searchState={ searchState }/> */}
             <div>
                 {
                     posts.length ? posts.map((onePost) => {
                         return (
-                            <div key={onePost._id}>
+                            <div key={onePost._id} className="PostsList">
                                 <Link to={`/${onePost._id}`}>  { onePost.title } ({ onePost.price })</Link>
-                                <hr/>
                             </div>
                         )
                     }) : "Did Not render update, posts.length does not exist"
