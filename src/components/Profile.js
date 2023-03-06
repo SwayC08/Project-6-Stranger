@@ -21,14 +21,12 @@ const Profile = (props) => {
         if (localStorage.getItem("token")){
             props.setLoggedIn(true);
             fetchPosts();
-            console.log("I was ran in profile");
+            // console.log("I was ran in profile");
         } else {
             props.setLoggedIn(false);
             console.log("No Token Exists");
         };
     }, []);
-
-    
 
 // Create request
     const createReq = async (event) => {
@@ -55,15 +53,13 @@ const Profile = (props) => {
                 })
             });
             const transData = await response.json();
-            console.log(transData);
+            // console.log(transData);
 
             if (!transData.success){
                 alert("Post was not created. Please try again. ");
             } else {
 //spread op (clone) + new post 
                 props.setPosts([...props.posts, transData.data]);
-                // setPosts([...posts, transData.data]);
-                // props.setPosts(translatedData);
                 alert("Post was successfully created.");
 // reset form
                 setCreateStat(false)
@@ -71,13 +67,12 @@ const Profile = (props) => {
                 setCreateDesc("")
                 setCreatePrice("")
 // nav to posts
-                // nav("/")
+                nav("/")
             }
         } catch (error){
             console.log(error);
         }
     };
-    // }, [])
 
     return(
         <div className='Profile'>
@@ -122,8 +117,6 @@ const Profile = (props) => {
                         </form>
                     ): ""
                 } 
-            </div>
-            <div>
             </div>
         </div>
     );

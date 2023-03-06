@@ -5,7 +5,6 @@ const ViewPost = (props) => {
     const { posts, setPosts, loggedIn, setUpdateState, updateState, fetchPosts} = props;
 
     const { _id } = useParams();
-    // console.log(useParams());
 
 // Toggle Edit button state 
     const [editState, setEditState] = useState(false);
@@ -25,7 +24,7 @@ const ViewPost = (props) => {
     let filterPosts = props.posts.filter((onePost) => {
         return onePost._id == _id
     });
-    console.log(filterPosts);
+    // console.log(filterPosts);
     // setPosts(filterPosts);
 
 
@@ -57,15 +56,10 @@ const ViewPost = (props) => {
 // Toggle Edit form (button) 
     function newRequest() {
         setUpdateState(!updateState);
-        // window.location.reload(false);
     };
 
     useEffect(() => {
         console.log(" ViewPost  Update");
-        // patchReq;
-        // setPosts(posts);
-        // setPosts(filteredPosts);
-        // console.log(filteredPosts);
     },[updateState])
 
 
@@ -95,7 +89,7 @@ const ViewPost = (props) => {
                 })
             });
             const transData = await response.json();
-            console.log(transData);
+            // console.log(transData);
 
             if (!transData.success){
                 alert("Post was not edited. Please try again. ");
@@ -115,9 +109,9 @@ const ViewPost = (props) => {
                 };
                 const newPostData = updatePostData();
                 props.setPosts(newPostData);
+
                 alert("Post was successfully edited.");
                 
-                props.setPosts(transData.data.post);
                 fetchPosts ();
                 nav("/");
             }

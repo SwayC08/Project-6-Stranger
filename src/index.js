@@ -30,7 +30,7 @@ const Main = ()=> {
 
     useEffect(()=>{
         fetchPosts();
-        console.log("I was ran in Index")
+        // console.log("I was ran in Index")
 }, [])
     
     return(
@@ -49,8 +49,6 @@ const Main = ()=> {
                 
                 <Route path ="/Logout" element={ <Logout loggedIn={loggedIn} setLoggedIn={ setLoggedIn } posts={posts} /> }/>
                 <Route path ="/NewUser" element={ <NewUser loggedIn={ loggedIn }  /> }/>
-                {/* <Route path ="/Reply" element={ <Reply posts={ posts } /> }/>    */}
-                {/* <Route path ="/Navbar" element={ <Navbar/> }/> */} 
             </Routes>
         </BrowserRouter>
     )
