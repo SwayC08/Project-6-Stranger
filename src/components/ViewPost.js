@@ -57,18 +57,18 @@ const ViewPost = (props) => {
     function newRequest() {
         setUpdateState(!updateState);
     };
-
+// Testing
     useEffect(() => {
         console.log(" ViewPost  Update");
     },[updateState])
 
-
+// Update changes made
     useEffect(()=>{
         console.log("I was activated in ViewPost")
         fetchPosts();
     }, [])
 
-// Update request 
+// Edit(PATCH) request 
     const patchReq = async (event) => {
         event.preventDefault();
         try {
@@ -109,10 +109,7 @@ const ViewPost = (props) => {
                 };
                 const newPostData = updatePostData();
                 props.setPosts(newPostData);
-
                 alert("Post was successfully edited.");
-                
-                fetchPosts ();
                 nav("/");
             }
         } catch (error){
@@ -137,12 +134,6 @@ const ViewPost = (props) => {
                 alert("Post was not deleted. Please try again.");
             } else {
                 alert("Post was successfully deleted.");
-// Filter by _id
-                // let filterPosts;
-                // filterPosts = props.posts.filter((onePost) => {
-                //     return onePost._id == _id
-                // });
-                setPosts(filterPosts);
                 nav("/")
             }
         } catch(error){
@@ -172,8 +163,6 @@ const ViewPost = (props) => {
                 alert("Reply was not sent. Please try again. ");
             } else {
                 alert("Reply was successfully sent.");
-                // props.setPosts(newPostData);
-                props.setPosts(transData.data.post);
                 nav("/Home");
             }    
         } catch (error){
