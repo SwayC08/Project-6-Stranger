@@ -8,9 +8,8 @@ const Main = ()=> {
     const [posts, setPosts] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
 
-// Update Post state 
+// Test (Update Post state) 
     const [updateState, setUpdateState] = useState(false); 
-
 
     const COHORT_NAME ='2301-ftb-mt-web-ft';
     const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;

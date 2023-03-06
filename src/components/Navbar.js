@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-// loggedIn
 const Navbar = (props) => {
     const { loggedIn } = props;
 

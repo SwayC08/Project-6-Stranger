@@ -5,8 +5,8 @@ import { Search } from "../components";
 const Post = (props) => {
     const { posts, setPosts, setUpdateState, updateState, fetchPosts } = props;
 
-    const [searchState, setSearchState]= useState(false)
-    const [search, setSearch] = useState("");
+    // const [searchState, setSearchState]= useState(false)
+    // const [search, setSearch] = useState("");
     // console.log(search.length);
 
     useEffect(() => {
@@ -34,7 +34,16 @@ const Post = (props) => {
                                 <Link to={`/${onePost._id}`}>  { onePost.title } ({ onePost.price })</Link>
                             </div>
                         )
-                    }) : "Did Not render update, posts.length does not exist"
+                    }) : "No Data available"
+                }
+            </div>
+        </div>
+    )
+}
+
+export default Post;
+
+
                     // filteredPosts.map((onePost) => {
                     //     return (
                     //         <div key={onePost._id}>
@@ -43,10 +52,3 @@ const Post = (props) => {
                     //         </div>
                     //     )
                     // })
-                }
-            </div>
-        </div>
-    )
-}
-
-export default Post;

@@ -40,9 +40,10 @@ const Login = () => {
                 alert("Login was unsuccessful. Please try again. ");
             } else {
                 const tokenKey = transData.data.token;
-                console.log(tokenKey);
+                // console.log(tokenKey);
                 localStorage.setItem("token", tokenKey);
                 alert("Login was successfully.");
+// reset form
                 setLoginUser("")
                 setLoginPass("")
                 nav("/Home")

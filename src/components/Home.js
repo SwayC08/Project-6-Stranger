@@ -32,8 +32,8 @@ const Home = (props) => {
                 }
             });    
             const transData = await response.json();
-            console.log(transData);
-            console.log(transData.data);
+            // console.log(transData);
+            // console.log(transData.data);
             setData(transData.data);
             setMyPosts(transData.data.posts);
             setMyMess(transData.data.messages);

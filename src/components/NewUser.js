@@ -35,16 +35,16 @@ const NewUser = () => {
                 })
             })
             const transData = await response.json();
-            console.log("this the data");
-            console.log(transData);
+            // console.log(transData);
 
             if (!transData.success){
                 alert("New Account was not registered. Please try again.");
             } else {
                 const tokenKey = transData.data.token;
-                console.log(tokenKey);
+                // console.log(tokenKey);
                 localStorage.setItem("token", tokenKey);
                 alert("New Account was successfully created.");
+//reset form 
                 setNewUser("")
                 setNewPass("")
                 nav("/Home")
